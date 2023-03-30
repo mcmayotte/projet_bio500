@@ -1,0 +1,1 @@
+visualisation <- function(data) nrow(data)
