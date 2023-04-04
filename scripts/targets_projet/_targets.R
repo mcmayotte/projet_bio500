@@ -8,7 +8,7 @@ library("rmarkdown")
 
 ## fichier doit obligatoirement s'appeller "_targets.R"
 # Scripts R
-source("nettoyer_donnees.R")
+source("data/donnees_nettoyees/nettoyage_donnees.R")
 source("visualisation.R")
 
 # Pipeline
