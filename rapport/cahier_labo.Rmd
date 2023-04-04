@@ -1,0 +1,11 @@
+---
+title: "Cahier de laboratoire"
+output: html_document
+date: "2023-03-30"
+---
+
+## Questions de recherche
+
+- #### Les gens qui proviennent des mêmes régions administratives semblent-ils collaborer plus souvent entre eux? (Y-a-t'il une association entre les regions-administratives et les collaborations?)
+
+- #### Est-ce que les cours qui ont beaucoup de crédits nécéssitent plus de collaborations? (Association entre nombre de crédits et nombre de collaborations?)

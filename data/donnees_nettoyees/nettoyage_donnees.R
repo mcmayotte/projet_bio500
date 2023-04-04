@@ -1,3 +1,4 @@
+read_data <- function() {
 ######################################################
 # Script pour nettoyer et assembler les données
 # Marie-Claude Mayotte, Ariane Barrette, Laurie-Anne Cournoyer & Mia Carrière
@@ -13,7 +14,7 @@
 
 # Set le working directory au fichier "projet_bio500/data"
 # setwd("/Users/marie-claudemayotte/Desktop/BIO500/projet_bio500/data/donnees_BIO500")
-allFiles <- dir()
+allFiles <- dir('data/donnees_BIO500')
 
 
 # Tables à fusioner
@@ -33,7 +34,7 @@ for(tab in tabNames) {
     
     # Avant  de charger les données, il faut savoir c'est quoi le séparateur utilisé car
     # il y a eu des données separées par "," et des autres separes par ";"
-    ficher <- paste0(tabFiles[groupe])
+    ficher <- paste0('data/donnees_BIO500/', tabFiles[groupe])
     L <- readLines(ficher, n = 1) # charger première ligne du donnée
     separateur <- ifelse(grepl(';', L), ';', ',') # S'il y a un ";", separateur est donc ";"
     
@@ -322,6 +323,4 @@ cours <- cours[!(cours$sigle=="ZOO304" & cours$optionnel=="FALSE"),]
 collaboration <- unique(collaboration[!duplicated(collaboration),])
 cours <- unique(cours[!duplicated(cours),])
 etudiant <- unique(etudiant[!duplicated(etudiant$prenom_nom),])
-
-
-
+}
