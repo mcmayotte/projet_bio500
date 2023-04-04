@@ -11,7 +11,7 @@ mafonction<-function(x in 1:162){
   if data[3,x]>1
   matrix[x,]
 }
-#test
+#testjj
 
 L[runif(S*S) < C] = 1
 sum(L)
