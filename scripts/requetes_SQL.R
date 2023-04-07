@@ -1,7 +1,7 @@
 creation_tab <- function (collaboration, etudiant, cours) {
 ####Connection au fichier la BD####
 library (RSQLite)
-con <- dbConnect(SQLite(), dbname = "db.bio")
+con <- dbConnect(SQLite(), dbname = "db.biologie")
 #astuce getwd() ou stewd()
 
 
