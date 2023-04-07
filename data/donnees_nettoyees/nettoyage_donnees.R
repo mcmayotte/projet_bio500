@@ -163,6 +163,9 @@ read_data <- function() {
     gsub("louis_phillippe_theriault", "louis_philippe_theriault", x) }))
   
   collaboration <- data.frame(lapply(collaboration, function(x){
+    gsub("madyson_mcclean", "madyson_mclean", x) }))
+  
+  collaboration <- data.frame(lapply(collaboration, function(x){
     gsub("mael_guerin", "mael_gerin", x) }))
   
   collaboration <- data.frame(lapply(collaboration, function(x){
@@ -340,7 +343,7 @@ read_data <- function() {
   setdiff(unique_et1_c, unique_etudiant)
   
   #Ajouter qui il manque
-  donnees_abs <- c("eloise_bernier", "eloise", "bernier", NA, NA, NA, NA, NA, "naomie_morin", "naomie", "morin", NA, NA, NA, NA, NA, "karim_hamzaoui", "karim", "hamzaoui", NA, NA, NA, NA, NA, "gabrielle_moreault", "gabrielle", "moreault", NA, NA, NA, NA, NA, "maxence_comyn", "maxence", "comyn", NA, NA, NA, NA, NA, "maude_viends", "maude", "viens", NA, NA, NA, NA, NA)
+  donnees_abs <- c("eloise_bernier", "eloise", "bernier", NA, NA, NA, NA, NA, "naomie_morin", "naomie", "morin", NA, NA, NA, NA, NA, "karim_hamzaoui", "karim", "hamzaoui", NA, NA, NA, NA, NA, "gabrielle_moreault", "gabrielle", "moreault", NA, NA, NA, NA, NA, "maxence_comyn", "maxence", "comyn", NA, NA, NA, NA, NA, "maude_viens", "maude", "viens", NA, NA, NA, NA, NA)
   etudiant_abs <- matrix(donnees_abs, nrow = 6, ncol = 8, byrow = TRUE)
   colnames(etudiant_abs) <- c("prenom_nom", "prenom", "nom", "region_administrative", "regime_coop", "formation_prealable", "annee_debut", "programme")
   etudiant <- rbind(etudiant, etudiant_abs)
