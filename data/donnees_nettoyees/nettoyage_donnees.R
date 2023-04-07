@@ -204,6 +204,12 @@ read_data <- function() {
   collaboration <- data.frame(lapply(collaboration, function(x){
     gsub("yanick_sageau", "yannick_sageau", x) }))
   
+  #-----------------------------------------------------
+  # Enlever fausses lignes de collaboration avec soi-même
+  #-----------------------------------------------------
+  collaboration <- subset(collaboration, etudiant1 != etudiant2)
+  
+  
   # Voir erreurs dans etudiant
   unique(sort(etudiant$prenom_nom))
   
@@ -348,4 +354,9 @@ read_data <- function() {
   colnames(etudiant_abs) <- c("prenom_nom", "prenom", "nom", "region_administrative", "regime_coop", "formation_prealable", "annee_debut", "programme")
   etudiant <- rbind(etudiant, etudiant_abs)
   rm(donnees_abs, etudiant_abs)
+  
+  #-----------------------------------------------------
+  # Enlever fausses lignes de collaboration avec soi-même
+  #-----------------------------------------------------
+  collaboration <- subset(collaboration, etudiant1 != etudiant2)
 }
