@@ -1,1 +1,0 @@
-visualisation <- function(collaboration, etudiant, cours) nrow(collaboration)

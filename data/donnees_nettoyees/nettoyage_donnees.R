@@ -13,7 +13,7 @@ read_data <- function() {
 # Extraire le nom des fichers de chaque groupe
 
 # Set le working directory au fichier "projet_bio500/data"
-# setwd("/Users/marie-claudemayotte/Desktop/BIO500/projet_bio500/data/donnees_BIO500")
+# setwd("/Users/marie-claudemayotte/Desktop/BIO500/projet_bio500")
 allFiles <- dir('data/donnees_BIO500')
 
 
