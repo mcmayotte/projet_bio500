@@ -1,11 +1,30 @@
 creation_tab <- function (collaboration, etudiant, cours) {
 ####Connection au fichier la BD####
 library (RSQLite)
-con <- dbConnect(SQLite(), dbname = "db.biologie")
+con <- dbConnect(SQLite(), dbname = "db.biocoordo12")
 #astuce getwd() ou stewd()
 
+#######Cle 1 - cours#####
+tbl_cours <-"
+CREATE TABLE cours (
+  sigle VARCHAR(6),
+  optionnel BOOLEAN,
+  credits INTEGER,
+  PRIMARY KEY(sigle)
+);"
+dbSendQuery(con,tbl_cours)
 
-#####Cle 2 - etudiant####
+#######Cle 2 - coordonnees#####
+tbl_coordo<-"
+CREATE TABLE coordonnees (
+  region_administrative VARCHAR(30),
+  longitude REAL(10),
+  latitude REAL(10),
+  PRIMARY KEY (longitude,latitude)
+);"
+dbSendQuery(con,tbl_coordo)
+
+#####Cle 3 - etudiant####
 tbl_etud<-"
 CREATE TABLE etudiants (
   prenom_nom VARCHAR(30),
@@ -20,15 +39,6 @@ CREATE TABLE etudiants (
 );"
 dbSendQuery(con,tbl_etud)
 
-#######Cle 3 - cours#####
-tbl_cours <-"
-CREATE TABLE cours (
-  sigle VARCHAR(6),
-  optionnel BOOLEAN,
-  credits INTEGER,
-  PRIMARY KEY(sigle)
-);"
-dbSendQuery(con,tbl_cours)
 
 #####Clé primaire - collaboration#####
 tbl_colla <- "
@@ -46,11 +56,34 @@ CREATE TABLE collaborations (
 dbSendQuery(con, tbl_colla)
 
 ##Avoir fait le script nettoyage_donnees.R AVANT
-
+coordonnees<-read.csv("data/coordonnees.csv",header=TRUE, sep=";")
 #Mettre les données dans la bd
 dbWriteTable(con, append = TRUE, name= "cours", value = cours, row.names = FALSE)
 dbWriteTable(con, append = TRUE, name= "etudiants", value = etudiant, row.names = FALSE)
+dbWriteTable(con, append = TRUE, name= "coordonnees", value = coordonnees, row.names = FALSE)
 dbWriteTable(con, append = TRUE, name= "collaborations", value = collaboration, row.names = FALSE)
+
+# Ajouter la colonne longitude dans la table etudiants
+dbSendQuery(con, "ALTER TABLE etudiants ADD COLUMN longitude REAL(10)")
+
+# Ajouter la colonne latitude column dans la table etudiants
+dbSendQuery(con, "ALTER TABLE etudiants ADD COLUMN latitude REAL(10)")
+
+# Mettre à jour les valeurs de longitude et de latitude dans la table etudiants à partir de la table coordonnees
+dbSendQuery(con, "
+  UPDATE etudiants
+  SET longitude = coordonnees.longitude, 
+      latitude = coordonnees.latitude 
+  FROM coordonnees 
+  WHERE etudiants.region_administrative = coordonnees.region_administrative
+")
+
+sql_requete <- "
+SELECT prenom_nom,region_administrative,longitude, latitude
+FROM etudiants;"
+
+etudiants_coordo<-dbGetQuery(con,sql_requete)
+head(etudiants_coordo)
 
 #requete nb lien par étudiants
 sql_requete <- "
@@ -77,7 +110,7 @@ head(nb_paire_colla)
 #Enregistrer les tableaux créer
 write.csv(nb_collab_etudiant, 'data/tableaux_SQL/nb_collab_etudiant.csv', row.names = FALSE)
 write.csv(nb_paire_colla,  'data/tableaux_SQL/nb_paire_colla.csv', row.names = FALSE)
-
+write.csv(etudiants_coordo, 'data/tableaux_SQL/etudiants_coordo',row.names = FALSE)
 
 #PAS OUBLIER!!!
 dbDisconnect(con)
