@@ -199,11 +199,6 @@ read_data <- function() {
   collaboration <- data.frame(lapply(collaboration, function(x){
     gsub("yanick_sagneau", "yannick_sageau", x) }))
   
-  etudiant <- data.frame(lapply(collaboration, function(x){
-    gsub("bas_st_laurent", "bas_saint_laurent", x) }))
-  
-  etudiant <- data.frame(lapply(collaboration, function(x){
-    gsub("monterigie", "monteregie", x) }))
   
   #-----------------------------------------------------
   # Enlever fausses lignes de collaboration avec soi-même
@@ -289,7 +284,11 @@ read_data <- function() {
     gsub("yanick_sageau", "yannick_sageau", x) }))
   
   etudiant <- data.frame(lapply(etudiant, function(x){
-    gsub("bas_", "yannick_sageau", x) }))
+    gsub("bas_st_laurent", "bas_saint_laurent", x) }))
+  
+  etudiant <- data.frame(lapply(etudiant, function(x){
+    gsub("monterigie", "monteregie", x) }))
+  
   
   #-----------------------------------------------------
   # Supprimer les lignes qui se répètent dans étudiant
