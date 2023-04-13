@@ -32,7 +32,7 @@ V(g)$size = col.vec[rk]
 
 
 #Différentes options de graphiques
-plot(g, vertex.label.cex=0.5, edge.arrow.mode = 0,
+plot(g, vertex.label=NA, edge.arrow.mode = 0,
      vertex.frame.color = NA)
 #notre pref
 plot(g,vertex.label = NA, edge.arrow.mode = 0,
@@ -40,11 +40,11 @@ plot(g,vertex.label = NA, edge.arrow.mode = 0,
      layout = layout.kamada.kawai(g))
 #graph cercle
 
-plot(g, vertex.label.cex=0.5, edge.arrow.mode = 0,
+plot(g, vertex.label=NA, edge.arrow.mode = 0,
      vertex.frame.color = NA,
      layout = layout.circle(g))
 
-plot(g, vertex.label=NA, vertex.label.cex=0.5,edge.arrow.mode = 0,
+plot(g, vertex.label=NA,edge.arrow.mode = 0,
      vertex.frame.color = NA)
 
 
