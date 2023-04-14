@@ -9,6 +9,7 @@ library("rmarkdown")
 source("scripts/nettoyage_donnees.R")
 source("scripts/requetes_SQL.R")
 
+
 # Pipeline
 list(
   tar_target(
@@ -16,17 +17,18 @@ list(
     command = read_data(),
   ), 
   tar_target(
+    #Je sais tu dont pas pourquoi cette ligne là
     name = file_paths, #Cible
     command = list.files(donnees, full.names = TRUE) # Liste les fichers dans le dossier
   ),
   # Toujours pas sure, mais j'ai ajouté les requetes sql ici
   tar_target(
     name = req_sql, #Cible pour le modèle
-    command = creation_tab(file_paths) #Exécuter
+    command = creation_tab() #Exécuter
   ),   
   tar_target(
     name = rapport_rmd,
-    command = render("rmd.Rmd")
+    command = render("rapport.Rmd")
   )
 )
 

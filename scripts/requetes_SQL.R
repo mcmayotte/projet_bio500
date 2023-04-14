@@ -1,7 +1,7 @@
-creation_tab <- function (collaboration, etudiant, cours) {
+creation_tab <- function (file_paths) {
 ####Connection au fichier la BD####
 library (RSQLite)
-con <- dbConnect(SQLite(), dbname = "db.biocoordo12")
+con <- dbConnect(SQLite(), dbname = "db.biocoordo3")
 #astuce getwd() ou stewd()
 
 #######Cle 1 - cours#####
@@ -57,6 +57,7 @@ dbSendQuery(con, tbl_colla)
 
 ##Avoir fait le script nettoyage_donnees.R AVANT
 coordonnees<-read.csv("data/coordonnees.csv",header=TRUE, sep=";")
+
 #Mettre les données dans la bd
 dbWriteTable(con, append = TRUE, name= "cours", value = cours, row.names = FALSE)
 dbWriteTable(con, append = TRUE, name= "etudiants", value = etudiant, row.names = FALSE)
