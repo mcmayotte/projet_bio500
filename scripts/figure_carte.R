@@ -1,6 +1,6 @@
 # Importer la bibliothèque
 library(leaflet)
-
+#Avoir fait les requêtes SQL
 # Charger les données du réseau de connexion étudiant
 nb_collab_region
 nb_collab_region_full<-subset(nb_collab_region,region_administrative_et1 !="NA")

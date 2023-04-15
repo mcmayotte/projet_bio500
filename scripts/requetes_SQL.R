@@ -143,7 +143,7 @@ ORDER BY region_administrative_et1 DESC
 nb_collab_region <- dbGetQuery(con, sql_requete)
 head(nb_collab_region)
 
-write.csv(nb_collab_region, 'nb_collab_region.csv', row.names = FALSE)
+write.csv(nb_collab_region, 'data/nb_collab_region.csv', row.names = FALSE)
 
 #requete nb lien par region_administrative
 sql_requete <- "
@@ -162,7 +162,7 @@ ORDER BY nb_collab DESC
 nb_collab_chq_region <- dbGetQuery(con, sql_requete)
 head(nb_collab_chq_region)
 
-write.csv(nb_collab_region, 'nb_collab_chq_region.csv', row.names = FALSE)
+write.csv(nb_collab_region, 'data/nb_collab_chq_region.csv', row.names = FALSE)
 
 
 
