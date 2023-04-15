@@ -164,7 +164,39 @@ head(nb_collab_chq_region)
 
 write.csv(nb_collab_region, 'data/nb_collab_chq_region.csv', row.names = FALSE)
 
+# Requete moyenne de collaboration pour chaque programme universitaire
+sql_requete <- "
+SELECT AVG(nb_collab) AS moy_collab, SQRT(VARIANCE(nb_collab)) AS ecart_type, formation_prealable
+FROM
+(
+SELECT count(etudiant1) AS nb_collab, etudiant1, formation_prealable
+FROM collaborations
+JOIN etudiants ON collaborations.etudiant1 = etudiants.prenom_nom
+GROUP BY etudiant1, formation_prealable
+)
+GROUP BY formation_prealable
+ORDER BY moy_collab DESC
+;"
 
+moy_collab_form <- dbGetQuery(con, sql_requete)
+head(moy_collab_form)
+
+# Requete moyenne collaboration pour chaque annee de début
+sql_requete <- "
+SELECT AVG(nb_collab) AS moy_collab, SQRT(VARIANCE(nb_collab)) AS ecart_type, annee_debut
+FROM
+(
+SELECT count(etudiant1) AS nb_collab, etudiant1, annee_debut
+FROM collaborations
+JOIN etudiants ON collaborations.etudiant1 = etudiants.prenom_nom
+GROUP BY etudiant1, annee_debut
+)
+GROUP BY annee_debut
+ORDER BY moy_collab DESC
+;"
+
+moy_collab_annee <- dbGetQuery(con, sql_requete)
+head(moy_collab_annee)
 
 #PAS OUBLIER!!!
 dbDisconnect(con)
