@@ -366,4 +366,11 @@ read_data <- function() {
   # Enlever fausses lignes de collaboration avec soi-même
   #-----------------------------------------------------
   collaboration <- subset(collaboration, etudiant1 != etudiant2)
+  
+  #-----------------------------------------------------
+  # Impression en csv des données nettoyées
+  #-----------------------------------------------------
+  write.csv(collaboration, 'data/donnees_nettoyees/collaboration_clean.csv',row.names = FALSE)
+  write.csv(etudiant, 'data/donnees_nettoyees/etudiant_clean.csv',row.names = FALSE) 
+  write.csv(cours, 'data/donnees_nettoyees/cours_clean.csv',row.names = FALSE)
 }

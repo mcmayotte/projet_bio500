@@ -2,6 +2,7 @@
 
 # Dépendances
 library("targets")
+library("tarchetypes")
 library("rmarkdown")
 
 ## fichier doit obligatoirement s'appeller "_targets.R"
@@ -13,20 +14,28 @@ source("scripts/requetes_SQL.R")
 # Pipeline
 list(
   tar_target(
+    # Script nettoyage_donnees, dont sort les 3 tables_clean dans donnees_nettoyees
     name = donnees, # Cible
     command = read_data(),
-  ), 
-  tar_target(
-    #Je sais tu dont pas pourquoi cette ligne là
-    name = file_paths, #Cible
-    command = list.files(donnees, full.names = TRUE) # Liste les fichers dans le dossier
   ),
-  # Toujours pas sure, mais j'ai ajouté les requetes sql ici
   tar_target(
+    # Pour que les tables_cleans soient luent et dispo
+    name = path, # Cible
+    command = "data/donnees_nettoyees", # Dossier contenant les fichiers de données
+    format = "file" # Format de la cible
+  ),
+  tar_target(
+    # Aucune maudite idée
+    name = file_paths, # Cible
+    command = list.files(path, full.names = TRUE) # Liste les fichiers dans le dossier
+  ),
+  tar_target(
+    # Scripts requetes_SQL, dont devraient sortir les donnees necessaires a la creation de figures
     name = req_sql, #Cible pour le modèle
-    command = creation_tab() #Exécuter
+    command = creation_tab(file_paths) #Exécuter
   ),   
   tar_target(
+    # Scripts pour faire le rapport.Rmd
     name = rapport_rmd,
     command = render("rapport.Rmd")
   )
