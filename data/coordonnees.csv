@@ -1,4 +1,4 @@
-﻿region_administrative;longitude_ra;latitude_ra
+﻿region_administrative;longitude;latitude
 estrie;-71.932146;45.372704
 centre_du_quebec;-72.154721;46.083512
 monteregie;-73.330627;45.342295
@@ -12,4 +12,4 @@ capitale_nationale;-71.298946;47.376245
 gaspesie_iles_de_la_madeleine;-65.0571;48.652927
 laurentides;-75.164531;46.709599
 abitibi_temiscamingue;-78.066214;47.807877
-bas_saint_laurent;-68.484619;48.192300
+bas_saint_laurent;-68.484619;48.1923

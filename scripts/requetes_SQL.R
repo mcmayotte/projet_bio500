@@ -1,7 +1,7 @@
 creation_tab <- function (file_paths) {
 ####Connection au fichier la BD####
 library (RSQLite)
-con <- dbConnect(SQLite(), dbname = "db.biocoordo3")
+con <- dbConnect(SQLite(), dbname = "db.biocoordo7")
 #astuce getwd() ou stewd()
 
 #######Cle 1 - cours#####
@@ -112,6 +112,59 @@ head(nb_paire_colla)
 write.csv(nb_collab_etudiant, 'data/tableaux_SQL/nb_collab_etudiant.csv', row.names = FALSE)
 write.csv(nb_paire_colla,  'data/tableaux_SQL/nb_paire_colla.csv', row.names = FALSE)
 write.csv(etudiants_coordo, 'data/tableaux_SQL/etudiants_coordo',row.names = FALSE)
+
+
+
+
+
+#Requetes nb collaboration par r.a.
+sql_requete <- "
+SELECT collaborations.etudiant1, collaborations.etudiant2, collaborations.sigle, collaborations.session, etudiants.region_administrative AS region_administrative_et1
+FROM collaborations
+JOIN etudiants ON collaborations.etudiant1 = etudiants.prenom_nom
+;"
+
+rae1 <- dbGetQuery(con, sql_requete)
+head(rae1)
+
+sql_requete <- "
+SELECT region_administrative_et1, region_administrative_et2, COUNT(*) AS nb_collab, longitude_et1, longitude_et2, latitude_et1, latitude_et2
+FROM (
+SELECT collaborations.etudiant1, collaborations.etudiant2, collaborations.sigle, collaborations.session, 
+       et1.region_administrative AS region_administrative_et1, et2.region_administrative AS region_administrative_et2, et1.longitude AS longitude_et1, et2.longitude AS longitude_et2, et1.latitude AS latitude_et1, et2.latitude AS latitude_et2
+FROM collaborations
+JOIN etudiants AS et1 ON collaborations.etudiant1 = et1.prenom_nom
+JOIN etudiants AS et2 ON collaborations.etudiant2 = et2.prenom_nom
+)
+GROUP BY region_administrative_et1, region_administrative_et2
+ORDER BY region_administrative_et1 DESC
+;"
+
+nb_collab_region <- dbGetQuery(con, sql_requete)
+head(nb_collab_region)
+
+write.csv(nb_collab_region, 'data/nb_collab_region.csv', row.names = FALSE)
+
+#requete nb lien par region_administrative
+sql_requete <- "
+SELECT count(region_administrative_et1) AS nb_collab, region_administrative_et1 
+FROM (
+SELECT collaborations.etudiant1, collaborations.etudiant2, collaborations.sigle, collaborations.session, 
+       et1.region_administrative AS region_administrative_et1, et2.region_administrative AS region_administrative_et2
+FROM collaborations
+JOIN etudiants AS et1 ON collaborations.etudiant1 = et1.prenom_nom
+JOIN etudiants AS et2 ON collaborations.etudiant2 = et2.prenom_nom
+)
+GROUP BY region_administrative_et1
+ORDER BY nb_collab DESC
+;"
+
+nb_collab_chq_region <- dbGetQuery(con, sql_requete)
+head(nb_collab_chq_region)
+
+write.csv(nb_collab_region, 'data/nb_collab_chq_region.csv', row.names = FALSE)
+
+
 
 #PAS OUBLIER!!!
 dbDisconnect(con)
