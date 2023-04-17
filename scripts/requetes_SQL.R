@@ -1,7 +1,7 @@
 creation_tab <- function (file_paths) {
 ####Connection au fichier la BD####
 library (RSQLite)
-con <- dbConnect(SQLite(), dbname = "db.biocoordo7")
+con <- dbConnect(SQLite(), dbname = "db.biocoordo10")
 #astuce getwd() ou stewd()
 
 #######Cle 1 - cours#####
@@ -113,10 +113,6 @@ write.csv(nb_collab_etudiant, 'data/tableaux_SQL/nb_collab_etudiant.csv', row.na
 write.csv(nb_paire_colla,  'data/tableaux_SQL/nb_paire_colla.csv', row.names = FALSE)
 write.csv(etudiants_coordo, 'data/tableaux_SQL/etudiants_coordo',row.names = FALSE)
 
-
-
-
-
 #Requetes nb collaboration par r.a.
 sql_requete <- "
 SELECT collaborations.etudiant1, collaborations.etudiant2, collaborations.sigle, collaborations.session, etudiants.region_administrative AS region_administrative_et1
@@ -135,6 +131,7 @@ SELECT collaborations.etudiant1, collaborations.etudiant2, collaborations.sigle,
 FROM collaborations
 JOIN etudiants AS et1 ON collaborations.etudiant1 = et1.prenom_nom
 JOIN etudiants AS et2 ON collaborations.etudiant2 = et2.prenom_nom
+WHERE et1.region_administrative IS NOT NULL AND et2.region_administrative IS NOT NULL
 )
 GROUP BY region_administrative_et1, region_administrative_et2
 ORDER BY region_administrative_et1 DESC

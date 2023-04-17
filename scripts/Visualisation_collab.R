@@ -34,10 +34,12 @@ V(g)$size = col.vec[rk]
 #Différentes options de graphiques
 plot(g, vertex.label=NA, edge.arrow.mode = 0,
      vertex.frame.color = NA)
-#notre pref
+#notre préféré
 plot(g,vertex.label = NA, edge.arrow.mode = 0,
      vertex.frame.color = NA,
      layout = layout.kamada.kawai(g))
+ggsave("figures/visualisation.png", device = "png", dpi=300) #ça l'enregistre un fond blanc
+
 #graph cercle
 
 plot(g, vertex.label=NA, edge.arrow.mode = 0,
@@ -46,7 +48,7 @@ plot(g, vertex.label=NA, edge.arrow.mode = 0,
 
 plot(g, vertex.label=NA,edge.arrow.mode = 0,
      vertex.frame.color = NA)
-
+#Enregistrer la figure
 
 #Calcul de propriétés
 # Évalue la présence communautés dans le graphe
