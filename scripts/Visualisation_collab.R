@@ -47,7 +47,7 @@ color_range <- range(1:r)
 # Ajouter la légende et un titre de figure
 par(mar=c(5,4,4,8))
 image.plot(legend.only = TRUE, horizontal=TRUE, zlim=color_range,col=color_gradient)
-title("Interactions entre les étudiants", line = 1, cex.main = 1.2)
+title("Réseau d'interactions entre les étudiants", line = 1, cex.main = 1.2)
 mtext("Rang des étudiants", side = 1, line = 1, cex = 1)
 dev.off()
 
