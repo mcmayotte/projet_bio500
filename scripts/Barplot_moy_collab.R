@@ -18,11 +18,14 @@ moy_collab_form <- subset(moy_collab_form, moy_collab_form$formation_prealable !
 barplot2(moy_collab_form$moy_collab, beside =T, ci.u = moy_collab_form$moy_collab + moy_collab_form$ecart_type, ci.l = moy_collab_form$moy_collab - moy_collab_form$ecart_type, plot.ci = T, 
          col = c("lightblue", "mistyrose", "lightcyan"), 
          names.arg = moy_collab_form$formation_prealable, 
-         xlab = "Formation préalable", ylab = "nombre moyen de collaborations",
+         xlab = "Formation préalable", ylab = "Nombre moyen de collaborations",
          ylim = c(0,80))
 
 # Ajouter une légende
-legend("topright", legend = moy_collab_form$formation_prealable, fill = col, border = NA, cex = 0.8)
+# legend("topright", legend = moy_collab_form$formation_prealable, fill = col, border = NA, cex = 0.8)
+
+#Enregistrer la figure
+png("figures/barplot_formation.png")
 
 #-----------------------------------------------------
 # nb moyen de collaboration ~ annee de début
@@ -35,5 +38,8 @@ moy_collab_annee <- subset(moy_collab_annee, moy_collab_annee$annee_debut != "NA
 barplot2(moy_collab_annee$moy_collab, beside =T, ci.u = moy_collab_annee$moy_collab + moy_collab_annee$ecart_type, ci.l = moy_collab_annee$moy_collab - moy_collab_annee$ecart_type, plot.ci = T, 
          col = c("lightblue", "mistyrose", "lightcyan"), 
          names.arg = moy_collab_annee$annee_debut, 
-         xlab = "Année de début", ylab = "nombre moyen de collaborations",
+         xlab = "Année de début", ylab = "Nombre moyen de collaborations",
          ylim = c(0,70))
+
+#Enregistrer la figure
+png("figures/barplot_annee.png")
