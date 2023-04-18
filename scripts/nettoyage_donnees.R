@@ -1,4 +1,4 @@
-read_data <- function() {
+clean_data <- function(file_paths) {
   ######################################################
   # Script pour nettoyer et assembler les données
   # Marie-Claude Mayotte, Ariane Barrette, Laurie-Anne Cournoyer & Mia Carrière
@@ -12,8 +12,9 @@ read_data <- function() {
   #-----------------------------------------------------
   # Extraire le nom des fichers de chaque groupe
   
+  # Je peux enlever ca plus tard je pense
   # Set le working directory au fichier "projet_bio500/data"
-  allFiles <- dir('data/donnees_BIO500')
+  #allFiles <- dir('data')
   
   # Tables à fusioner
   tabNames <- c('collaboration', 'cours','etudiant')
@@ -30,9 +31,7 @@ read_data <- function() {
       # Definir le nom de l'obj dans lequel sauver les donnees de la table `tab` du groupe `groupe`
       tabName <- paste0(tab, "_", groupe)
       
-      # Avant  de charger les données, il faut savoir c'est quoi le séparateur utilisé car
-      # il y a eu des données separées par "," et des autres separes par ";"
-      ficher <- paste0('data/donnees_BIO500/', tabFiles[groupe])
+      ficher <- paste0('data/', tabFiles[groupe])
       L <- readLines(ficher, n = 1) # charger première ligne du donnée
       separateur <- ifelse(grepl(';', L), ';', ',') # S'il y a un ";", separateur est donc ";"
       
@@ -56,10 +55,8 @@ read_data <- function() {
   
   # Supprimer les colones vides ou inutiles
   collaboration_7 <- collaboration_7[,-c(5:9)]
-  
   cours_5 <- cours_5[,-4]
   cours_7 <- cours_7[,-c(4:9)]
-  
   etudiant_3 <- etudiant_3[,-9]
   etudiant_4 <- etudiant_4[,-9]
   etudiant_7 <- etudiant_7[,-9]
@@ -68,25 +65,12 @@ read_data <- function() {
   #-----------------------------------------------------
   # 2.5 Fusionner les donnees de chaque groupe en un seul data.frame
   #-----------------------------------------------------
-  
   collaboration <- rbind(collaboration_1,collaboration_10,collaboration_2,collaboration_3,collaboration_4,collaboration_5,collaboration_6,collaboration_7,collaboration_8,collaboration_9)
   etudiant <- rbind(etudiant_1,etudiant_10,etudiant_2,etudiant_3,etudiant_4,etudiant_5,etudiant_6,etudiant_7,etudiant_8,etudiant_9)
   cours <- rbind(cours_1,cours_10,cours_2,cours_3,cours_4,cours_5,cours_6,cours_7,cours_8,cours_9)
   
-  # Pour moins me perdre dans les 10 000 tableaux
+  # Suppressions data inutile
   rm(cours_1, cours_2, cours_3, cours_4, cours_5, cours_6, cours_7, cours_8, cours_9, cours_10, collaboration_1, collaboration_2, collaboration_3, collaboration_4, collaboration_5, collaboration_6, collaboration_7, collaboration_8, collaboration_9, collaboration_10, etudiant_1, etudiant_2, etudiant_3, etudiant_4, etudiant_5, etudiant_6, etudiant_7, etudiant_8, etudiant_9, etudiant_10)
-  
-  # Supprimer les lignes vides
-  collaboration <- subset(collaboration, etudiant1 !="")
-  etudiant <- subset(etudiant, prenom_nom !="")
-  cours <- subset(cours, sigle !="")
-  
-  # changer les VRAI et FAUX en TRUE et FALSE dans les tables cours et etudiants
-  cours$optionnel<- ifelse(cours$optionnel== "VRAI", "TRUE", cours$optionnel)
-  cours$optionnel<- ifelse(cours$optionnel== "FAUX", "FALSE", cours$optionnel)
-  
-  etudiant$regime_coop <- ifelse(etudiant$regime_coop== "FAUX", "FALSE", etudiant$regime_coop)
-  etudiant$regime_coop <- ifelse(etudiant$regime_coop== "VRAI", "TRUE", etudiant$regime_coop)
   
   #-----------------------------------------------------
   # Vérifier si chacune des valeurs pour chaque colonne respecte le formatage
@@ -99,7 +83,6 @@ read_data <- function() {
   # changer les VRAI et FAUX en TRUE et FALSE dans les tables cours et etudiants
   cours$optionnel<- ifelse(cours$optionnel== "VRAI", "TRUE", cours$optionnel)
   cours$optionnel<- ifelse(cours$optionnel== "FAUX", "FALSE", cours$optionnel)
-  
   etudiant$regime_coop <- ifelse(etudiant$regime_coop== "FAUX", "FALSE", etudiant$regime_coop)
   etudiant$regime_coop <- ifelse(etudiant$regime_coop== "VRAI", "TRUE", etudiant$regime_coop)
   
@@ -124,6 +107,7 @@ read_data <- function() {
   # Voir erreurs dans collaboration
   unique(sort(collaboration$etudiant1))
   
+  # Corriger erreurs dans collaboration
   collaboration <- data.frame(lapply(collaboration, function(x){
     gsub("ariane_barette", "ariane_barrette", x) }))
   
@@ -207,7 +191,6 @@ read_data <- function() {
   #-----------------------------------------------------
   collaboration <- subset(collaboration, etudiant1 != etudiant2)
   
-  
   # Voir erreurs dans etudiant
   unique(sort(etudiant$prenom_nom))
   unique(sort(etudiant$region_administrative))
@@ -284,6 +267,7 @@ read_data <- function() {
   
   etudiant <- data.frame(lapply(etudiant, function(x){
     gsub("yanick_sageau", "yannick_sageau", x) }))
+  
   etudiant <- data.frame(lapply(etudiant, function(x){
     gsub("yanick_sageau", "yannick_sageau", x) }))
   
@@ -292,7 +276,6 @@ read_data <- function() {
   
   etudiant <- data.frame(lapply(etudiant, function(x){
     gsub("monterigie", "monteregie", x) }))
-  
   
   #-----------------------------------------------------
   # Supprimer les lignes qui se répètent dans étudiant
@@ -314,12 +297,9 @@ read_data <- function() {
   # Remettre les deux tableau ensemble
   etudiant <- rbind(etudiant_info, etudiant_vide) 
   
-  rm(etudiant_info, etudiant_vide)
-  
   #-----------------------------------------------------
-  # Corriger erreurs dans cours (J'ai gardé les cours oblig a eco slm)
+  # Corriger erreurs dans cours (J'ai suivi les cours obligatoires et optionnels pour le programme d'écologie)
   #-----------------------------------------------------
-  
   cours <- cours[!(cours$sigle=="BCM112" & cours$optionnel=="TRUE"),]
   cours <- cours[!(cours$sigle=="BCM113" & cours$optionnel=="TRUE"),]
   cours <- cours[!(cours$sigle=="BIO109" & cours$credits=="2"),]
@@ -360,7 +340,9 @@ read_data <- function() {
   etudiant_abs <- matrix(donnees_abs, nrow = 6, ncol = 8, byrow = TRUE)
   colnames(etudiant_abs) <- c("prenom_nom", "prenom", "nom", "region_administrative", "regime_coop", "formation_prealable", "annee_debut", "programme")
   etudiant <- rbind(etudiant, etudiant_abs)
-  rm(donnees_abs, etudiant_abs, unique_et1_c, unique_etudiant, L, nbGroupe, separateur, tabNames)
+  
+  # Supprimer data et values inutiles
+  rm(etudiant_info, etudiant_vide, donnees_abs, etudiant_abs, unique_et1_c, unique_etudiant, L, nbGroupe, separateur, tabNames)
   
   #-----------------------------------------------------
   # Enlever fausses lignes de collaboration avec soi-même
@@ -368,9 +350,7 @@ read_data <- function() {
   collaboration <- subset(collaboration, etudiant1 != etudiant2)
   
   #-----------------------------------------------------
-  # Impression en csv des données nettoyées
+  # Création d'une liste pour le targets
   #-----------------------------------------------------
-  write.csv(collaboration, 'data/donnees_nettoyees/collaboration_clean.csv',row.names = FALSE)
-  write.csv(etudiant, 'data/donnees_nettoyees/etudiant_clean.csv',row.names = FALSE) 
-  write.csv(cours, 'data/donnees_nettoyees/cours_clean.csv',row.names = FALSE)
+  return(list(collaboration, cours, etudiant))
 }

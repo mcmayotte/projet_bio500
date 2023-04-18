@@ -1,4 +1,4 @@
-creation_tab <- function (file_paths) {
+creation_tab <- function (data) {
 ####Connection au fichier la BD####
 library (RSQLite)
 con <- dbConnect(SQLite(), dbname = "db.biocoordo10")
@@ -55,7 +55,7 @@ CREATE TABLE collaborations (
 
 dbSendQuery(con, tbl_colla)
 
-##Avoir fait le script nettoyage_donnees.R AVANT
+#####Avoir fait le script nettoyage_donnees.R AVANT
 coordonnees<-read.csv("data/coordonnees.csv",header=TRUE, sep=";")
 
 #Mettre les données dans la bd
@@ -109,19 +109,19 @@ nb_paire_colla<- dbGetQuery(con, sql_requete)
 head(nb_paire_colla)
 
 #Enregistrer les tableaux créer
-write.csv(nb_collab_etudiant, 'data/tableaux_SQL/nb_collab_etudiant.csv', row.names = FALSE)
-write.csv(nb_paire_colla,  'data/tableaux_SQL/nb_paire_colla.csv', row.names = FALSE)
-write.csv(etudiants_coordo, 'data/tableaux_SQL/etudiants_coordo',row.names = FALSE)
+#write.csv(nb_collab_etudiant, 'data/tableaux_SQL/nb_collab_etudiant.csv', row.names = FALSE)
+#write.csv(nb_paire_colla,  'data/tableaux_SQL/nb_paire_colla.csv', row.names = FALSE)
+#write.csv(etudiants_coordo, 'data/tableaux_SQL/etudiants_coordo',row.names = FALSE)
 
 #Requetes nb collaboration par r.a.
-sql_requete <- "
-SELECT collaborations.etudiant1, collaborations.etudiant2, collaborations.sigle, collaborations.session, etudiants.region_administrative AS region_administrative_et1
-FROM collaborations
-JOIN etudiants ON collaborations.etudiant1 = etudiants.prenom_nom
-;"
+#sql_requete <- "
+#SELECT collaborations.etudiant1, collaborations.etudiant2, collaborations.sigle, collaborations.session, etudiants.region_administrative AS region_administrative_et1
+#FROM collaborations
+#JOIN etudiants ON collaborations.etudiant1 = etudiants.prenom_nom
+#;"
 
-rae1 <- dbGetQuery(con, sql_requete)
-head(rae1)
+#rae1 <- dbGetQuery(con, sql_requete)
+#head(rae1)
 
 sql_requete <- "
 SELECT region_administrative_et1, region_administrative_et2, COUNT(*) AS nb_collab, longitude_et1, longitude_et2, latitude_et1, latitude_et2
@@ -140,7 +140,7 @@ ORDER BY region_administrative_et1 DESC
 nb_collab_region <- dbGetQuery(con, sql_requete)
 head(nb_collab_region)
 
-write.csv(nb_collab_region, 'data/nb_collab_region.csv', row.names = FALSE)
+# write.csv(nb_collab_region, 'data/nb_collab_region.csv', row.names = FALSE)
 
 #requete nb lien par region_administrative
 sql_requete <- "
@@ -159,7 +159,7 @@ ORDER BY nb_collab DESC
 nb_collab_chq_region <- dbGetQuery(con, sql_requete)
 head(nb_collab_chq_region)
 
-write.csv(nb_collab_region, 'data/nb_collab_chq_region.csv', row.names = FALSE)
+#write.csv(nb_collab_region, 'data/nb_collab_chq_region.csv', row.names = FALSE)
 
 # Requete moyenne de collaboration pour chaque programme universitaire
 sql_requete <- "
@@ -195,6 +195,13 @@ ORDER BY moy_collab DESC
 moy_collab_annee <- dbGetQuery(con, sql_requete)
 head(moy_collab_annee)
 
+#-----------------------------------------------------
+# Création d'une liste pour le targets
+#-----------------------------------------------------
+return(list(moy_collab_annee, moy_collab_form, nb_collab_region, nb_paire_colla, etudiants_coordo, nb_collab_etudiant))
+
 #PAS OUBLIER!!!
 dbDisconnect(con)
+
+
 }

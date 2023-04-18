@@ -1,3 +1,9 @@
+######################################################
+# Script targets pour définir le pipeline
+# Marie-Claude Mayotte, Ariane Barrette, Laurie-Anne Cournoyer & Mia Carrière
+# 15 mars 2023
+######################################################
+
 # set le working directory à "projet_bio500" (project directory)
 
 # Dépendances
@@ -5,40 +11,37 @@ library("targets")
 library("tarchetypes")
 library("rmarkdown")
 
-## fichier doit obligatoirement s'appeller "_targets.R"
-# Scripts R
+# Localisation des scripts R
 source("scripts/nettoyage_donnees.R")
 source("scripts/requetes_SQL.R")
-
 
 # Pipeline
 list(
   tar_target(
-    # Script nettoyage_donnees, dont sort les 3 tables_clean dans donnees_nettoyees
-    name = donnees, # Cible
-    command = read_data(),
-  ),
-  tar_target(
-    # Pour que les tables_cleans soient luent et dispo
     name = path, # Cible
-    command = "data/donnees_nettoyees", # Dossier contenant les fichiers de données
+    command = "./data", # Dossier contenant les fichiers de données
     format = "file" # Format de la cible
   ),
   tar_target(
-    # Aucune maudite idée
     name = file_paths, # Cible
     command = list.files(path, full.names = TRUE) # Liste les fichiers dans le dossier
   ),
   tar_target(
+    name = data, # Cible pour le modèle 
+    command = clean_data(file_paths) # Jointure des jeux de données
+  ),
+  tar_target(
     # Scripts requetes_SQL, dont devraient sortir les donnees necessaires a la creation de figures
     name = req_sql, #Cible pour le modèle
-    command = creation_tab(file_paths) #Exécuter
-  ),   
+    command = creation_tab(data) #Exécuter
+  ),
   tar_target(
-    # Scripts pour faire le rapport.Rmd
-    name = rapport_rmd,
-    command = render("rapport.Rmd")
+    name = reseau, # Cible pour le modèle 
+    command = mon_modele(req_sql) # Exécution de l'analyse
+  ),
+  tar_render(
+    name = rapport, # Cible du rapport
+    path = "rapport/rapport.Rmd" # Le path du rapport à renderiser
   )
 )
-
 

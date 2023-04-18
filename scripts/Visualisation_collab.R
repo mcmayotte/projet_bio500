@@ -1,4 +1,5 @@
-#Télécharger les library nécessaires
+reseau<-function(req_sql) {
+  #Télécharger les library nécessaires
 
 library(igraph)
 # Créer la matrice
@@ -62,4 +63,4 @@ modularity(wtc)
 distances(g)
 #centralité des noeuds
 eigen_centrality(g)$vector
-
+}
