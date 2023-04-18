@@ -14,7 +14,7 @@ clean_data <- function(file_paths) {
   
   # Je peux enlever ca plus tard je pense
   # Set le working directory au fichier "projet_bio500/data"
-  #allFiles <- dir('data')
+  allFiles <- dir('data')
   
   # Tables à fusioner
   tabNames <- c('collaboration', 'cours','etudiant')
