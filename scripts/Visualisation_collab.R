@@ -30,15 +30,18 @@ col.vec <- seq(1, 5, length.out = r)
 # Attribuer aux noeuds la couleur
 V(g)$size = col.vec[rk]
 
+#notre préféré
+png("figures/visualisation.png",600,600)
+plot(g,vertex.label = NA, edge.arrow.mode = 0,
+     vertex.frame.color = NA,
+     layout = layout.kamada.kawai(g))
+dev.off()
+ggsave("figures/visualisation.png", plot=w,device = "png", dpi=300) #ça l'enregistre un fond blanc
 
 #Différentes options de graphiques
 plot(g, vertex.label=NA, edge.arrow.mode = 0,
      vertex.frame.color = NA)
-#notre préféré
-plot(g,vertex.label = NA, edge.arrow.mode = 0,
-     vertex.frame.color = NA,
-     layout = layout.kamada.kawai(g))
-ggsave("figures/visualisation.png", device = "png", dpi=300) #ça l'enregistre un fond blanc
+
 
 #graph cercle
 
