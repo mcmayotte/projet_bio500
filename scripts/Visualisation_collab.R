@@ -2,6 +2,7 @@ reseau<-function(req_sql) {
   #Télécharger les library nécessaires
 
 library(igraph)
+library(fields)
 # Créer la matrice
 r<-nrow(etudiant)
 matrice_interact <- matrix(0, nr = r, nc = r)
@@ -31,28 +32,24 @@ col.vec <- seq(1, 5, length.out = r)
 # Attribuer aux noeuds la couleur
 V(g)$size = col.vec[rk]
 
-#notre préféré
+#Réalisation de la figure
 png("figures/visualisation.png",600,600)
 plot(g,vertex.label = NA, edge.arrow.mode = 0,
      vertex.frame.color = NA,
      layout = layout.kamada.kawai(g))
+
+# Define the color gradient for the legend
+color_gradient <- colorRampPalette(heat.colors(r))(100)
+
+# Définir le range de couleur
+color_range <- range(1:r)
+
+# Ajouter la légende et un titre de figure
+par(mar=c(5,4,4,8))
+image.plot(legend.only = TRUE, horizontal=TRUE, zlim=color_range,col=color_gradient)
+title("Interactions entre les étudiants", line = 1, cex.main = 1.2)
+mtext("Rang des étudiants", side = 1, line = 1, cex = 1)
 dev.off()
-ggsave("figures/visualisation.png", plot=w,device = "png", dpi=300) #ça l'enregistre un fond blanc
-
-#Différentes options de graphiques
-plot(g, vertex.label=NA, edge.arrow.mode = 0,
-     vertex.frame.color = NA)
-
-
-#graph cercle
-
-plot(g, vertex.label=NA, edge.arrow.mode = 0,
-     vertex.frame.color = NA,
-     layout = layout.circle(g))
-
-plot(g, vertex.label=NA,edge.arrow.mode = 0,
-     vertex.frame.color = NA)
-#Enregistrer la figure
 
 #Calcul de propriétés
 # Évalue la présence communautés dans le graphe
