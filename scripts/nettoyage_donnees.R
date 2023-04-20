@@ -352,5 +352,6 @@ clean_data <- function(file_paths) {
   #-----------------------------------------------------
   # Création d'une liste pour le targets
   #-----------------------------------------------------
-  return(list(collaboration, cours, etudiant))
+  list1 <- list(etudiant, cours, collaboration) 
+  return(list1)
 }

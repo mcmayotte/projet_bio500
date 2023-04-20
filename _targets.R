@@ -35,13 +35,10 @@ list(
     name = req_sql, #Cible pour le modèle
     command = creation_tab(data) #Exécuter
   ),
-  tar_target(
-    name = reseau, # Cible pour le modèle 
-    command = mon_modele(req_sql) # Exécution de l'analyse
-  ),
   tar_render(
     name = rapport, # Cible du rapport
-    path = "rapport/rapport.Rmd" # Le path du rapport à renderiser
+    path = "./rapport/rapport.Rmd" # Le path du rapport à renderiser
   )
 )
+
 

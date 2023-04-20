@@ -1,11 +1,12 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-clean_data|function|62d37ab4e7933b33|||||||||||||||
-creation_tab|function|976357ec985a0848|||||||||||||||
-data|stem|95f52b82d8cbf8d1|e05a42f087a313fb|5f5382e1b5e5d077|1588979285||t19465.8855627739s|f8b2cd39b058dfcb|24614|rds|local|vector|||1.184||
+clean_data|function|a0a8be118d4a572c|||||||||||||||
+creation_tab|function|a2ac14a30277ae99|||||||||||||||
+data|stem|ba3edee8befa735d|e05a42f087a313fb|fedc13768865a3b6|1588979285||t19467.5240111299s|9b045980f7322433|24354|rds|local|vector|||1.285||
 donnees|stem|3fe873ceaa51890e|8bb3f4eee3e1487e|e2e5b02d6c11ab34|-1612055499||t19462.5796189989s|a1c456b03adbfbf8|44|rds|local|vector|||1.14||
 file_paths|stem|33dfabffe85cbb40|71948d4e0817f43c|abc94aa3aac4d92f|1115504559||t19465.8833376154s|1a043faf0b3206cc|212|rds|local|vector|||0.001||
 path|stem|b6008fdf31dfd7e2|2aa68212adf25336|ef46db3751d8e999|-1383433547|./data|t19465.673671071s|7d645bf271ac4f66|1088|file|local|vector|||0.002||
-rapport|stem|eb15c6e7f6937400|9b10d1efde4e6761|4745aa592080ea1d|-316371949|rapport/rapport.html*rapport/rapport.Rmd|t19465.5882604645s|db9ec3cf612fc4f5|623345|file|local|vector|||2.456||
+rapport|stem|eb15c6e7f6937400|82111be8a07d6cc5|4745aa592080ea1d|-316371949|rapport/rapport.html*rapport/rapport.Rmd|t19467.531736231s|db9ec3cf612fc4f5|623345|file|local|vector|||1.874||
 rapport_rmd|stem||d5543d6cf6688137|ca4d1c3ee127925b|1333238327||t19461.7730027703s||0|rds|local|vector|||0.405|path1rapport.Rmd No such file or directory|The file rapport.Rmd does not exist.
 read_data|function|8b525dd7e33fca52|||||||||||||||
-req_sql|stem||2bb920abbb076309|5e83c4b20f1863fe|1634902131||t19461.8195417734s||0|rds|local|vector|||0.366|Closing open result set, pending rows. Closing open result set, pending rows. Closing open result set, pending rows|error in evaluating the argument value in selecting a method for function dbWriteTable object cours not found
+req_sql|stem|79f9d37b642a1f9e|2bb920abbb076309|21153542f9446808|1634902131||t19467.5309095017s|bf1a1ce7cd804ab5|251|rds|local|vector|||0.553|Closing open result set, pending rows. Closing open result set, pending rows. Closing open result set, pending rows. Closing open result set, pending rows|
+reseau|stem||c80b227b90cbef2f|cb705fbc0389cba8|-902459421||t19467.528982341s||0|rds|local|vector|||0.004||could not find function mon_modele

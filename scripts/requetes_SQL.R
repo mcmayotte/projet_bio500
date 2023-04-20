@@ -1,8 +1,12 @@
 creation_tab <- function (data) {
 ####Connection au fichier la BD####
 library (RSQLite)
-con <- dbConnect(SQLite(), dbname = "db.biocoordo10")
-#astuce getwd() ou stewd()
+con <- dbConnect(SQLite(), dbname = "db.bio500")
+
+# Aller chercher les données de la fonction clean_data
+etudiant <- data[[1]]
+cours <- data[[2]]
+collaboration <- data[[3]]
 
 #######Cle 1 - cours#####
 tbl_cours <-"
@@ -63,6 +67,8 @@ dbWriteTable(con, append = TRUE, name= "cours", value = cours, row.names = FALSE
 dbWriteTable(con, append = TRUE, name= "etudiants", value = etudiant, row.names = FALSE)
 dbWriteTable(con, append = TRUE, name= "coordonnees", value = coordonnees, row.names = FALSE)
 dbWriteTable(con, append = TRUE, name= "collaborations", value = collaboration, row.names = FALSE)
+
+return(con)
 
 # Ajouter la colonne longitude dans la table etudiants
 dbSendQuery(con, "ALTER TABLE etudiants ADD COLUMN longitude REAL(10)")
@@ -205,3 +211,4 @@ dbDisconnect(con)
 
 
 }
+
