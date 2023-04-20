@@ -354,4 +354,5 @@ clean_data <- function(file_paths) {
   #-----------------------------------------------------
   list1 <- list(etudiant, cours, collaboration) 
   return(list1)
+  
 }
