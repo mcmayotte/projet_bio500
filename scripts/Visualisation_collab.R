@@ -32,13 +32,13 @@ col.vec <- seq(1, 5, length.out = r)
 # Attribuer aux noeuds la couleur
 V(g)$size = col.vec[rk]
 
-#Réalisation de la figure
+#Réalisation de la figure                     ##NE PAS RUN LA LIGNE 36 ET LA LIGNE 52 SI L'ON SOUHAITE VISUALISER LA FIGURE
 png("figures/visualisation.png",600,600)
 plot(g,vertex.label = NA, edge.arrow.mode = 0,
      vertex.frame.color = NA,
      layout = layout.kamada.kawai(g))
 
-# Define the color gradient for the legend
+# Définir le gradient de couleur pour la légende
 color_gradient <- colorRampPalette(heat.colors(r))(100)
 
 # Définir le range de couleur
