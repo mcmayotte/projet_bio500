@@ -356,4 +356,3 @@ clean_data <- function(file_paths) {
   return(list1)
   
 }
-
