@@ -44,13 +44,24 @@ Note: please start your introduction without including the word
 Physical Sciences section); this heading is implied in the first
 paragraphs.
 
-# Guide to using this template {.unnumbered}
+# Discussion
 
-Please note that whilst this template provides a preview of the typeset
-manuscript for submission, to help in this preparation, it will not
-necessarily be the final publication layout. For more detailed
-information please see the [PNAS Information for
-Authors](http://www.pnas.org/site/authors/format.xhtml).
+##Centralité
+La centralité est un concept important dans les réseaux écologiques puisqu’elle est souvent utiliser afin d’identifier les espèces « clés » du système [@cagua2019keystoneness].  En effet, selon ce principe, les espèces participants dans plus de chaines sont plus susceptibles d’affecter l’abondance des autres espèces [@cagua2019keystoneness]. De plus, elle peut apporter de l’information pour prédire quelle espèce, si elle venait à disparaître, aurait le plus grand impact sur la communauté [@cagua2019keystoneness]. Toutefois, il faut apporter la nuance que la centralité ne parvient pas à identifier les espèces qui sont moins connectés, mais qui ont tout de même une grande capacité de contrôle sur la communauté [@cagua2019keystoneness]. Dans le cas de cette expérience, il est premièrement possible d’observer un patron de centralité entre les étudiants en analysant leurs interactions dans les travaux scolaires. En effet, les étudiants ayant collaborés avec un grand nombre de personnes différentes sont représentés comme étant des étudiants centraux. En interagissant avec une grande partie du réseau, ces étudiants ont un impact significatif sur l'abondance des autres élèves, qui dans ce contexte peut être représentée par leurs notes scolaires, établissant ainsi un lien avec les systèmes écologiques. 
+Par ailleurs, ce réseau prend seulement en compte les interactions entre les élèves de la classe. Toutefois, plusieurs élèves ont interagi, au cours de leur baccalauréat, avec des étudiants ne se sont pas dans ce cours. Par conséquent, ces étudiants font donc partie d’un autre réseau et la centralité ne nous permet donc pas d’évaluer adéquatement leur importance. 
+
+##Patrons d’interactions
+Tous les réseaux écologiques, même les plus hétérogènes, présentent certaines structures et regroupements d’interactions entre les nœuds  [@delmas2019analysing; @milo2002shen]. En fait, il existe 13 patrons possibles pour une interaction à trois nœuds chacun représentant une relation différente  [@delmas2019analysing; @milo2002shen]. Par exemple, il y a la concurrence entre A et B pour la ressource partagée C (A -> C <- B) ou une chaine alimentaire où A prédate B et B prédate C (A -> B -> C) [@delmas2019analysing; @milo2002shen]. En se basant sur la formation préalable des étudiants, on peut observer que les étudiants ayant une formation universitaire sont plus susceptible de travailler avec un plus grand nombre de personnes différentes que les personnes ayant une formation technicienne. De plus, les étudiants qui sont rentrés au baccalauréat en écologie en hiver 2019 ont travaillé avec un plus grand nombre de personnes que ceux des autres sessions d’admission et cela malgré qu’ils soient beaucoup moins que les étudiants à être rentrés à l’automne 2020. Cela est assez logique puisque ces étudiants ont un parcours différent et par conséquent, ils doivent souvent collaborés avec d’autres cohortes. Il est donc possible d’observer certains patrons d’interactions entre les élèves.  
+
+Toutefois, ces résultats sont surtout préliminaires puisqu’ils ne tiennent pas compte de la proportion d’étudiants dans chaque catégorie. Par exemple, comme il y a moins d’étudiants qui ont une formation technicienne que pré-universitaire, il est logique qu’il possède un nombre d’interactions inférieurs aux autres catégories. Pour avoir un meilleur aperçu des regroupements, il faudrait pondérer les moyens de chaque catégorie. 
+
+##Connectivité des régions administratives
+ Pour assurer la survie des espèces, il est crucial d'évaluer leur connectivité entre les différentes zones géographiques [@baguette2013individual]. En effet, la disparition d'une population locale peut précéder l'extinction de l'espèce dans son ensemble [@baguette2013individual]. De plus, certaines espèces jouent un rôle central dans le réseau écologique, ce qui signifie que leur disparition peut entraîner des conséquences importantes sur d'autres espèces et sur la stabilité de l'écosystème [@baguette2013individual]. Il est donc important de prendre en compte à la fois la connectivité des habitats et le rôle des espèces centrales pour maintenir la biodiversité [@baguette2013individual].
+
+En observant les interactions entre les élèves, la région de Montréal apparaît comme la zone centrale la plus peuplée en termes d'étudiants, ce qui est cohérent étant donné qu'elle est la région la plus densément peuplée du Québec. De plus, la zone avec la dispersion la plus importante, caractérisée ici par les interactions entre les étudiants, se situe entre Montréal et Sherbrooke. Il semble y avoir un patron montrant que la majorité des étudiants, quelle que soit leur région administrative, ont tendance à interagir plus fréquemment avec les zones centrales telles que Montréal, Sherbrooke et Trois-Rivières, plutôt qu'avec les zones situées à proximité. Pour établir un parallèle avec le réseau écologique, cette observation pourrait être attribuée à la présence d'étudiants clés dans ces régions. 
+
+Bref, le réseaux étudiants ressemblent sur plusieurs points aux réseaux écologiques par sa centralité, ses patrons d’assemblages et par la connectivité des régions administratives. 
+
 
 ## Author Affiliations {#author-affiliations .unnumbered}
 
