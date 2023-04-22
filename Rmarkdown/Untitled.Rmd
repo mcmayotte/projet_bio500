@@ -1,5 +1,5 @@
 ---
-title: Template for preparing your research report submission to PNAS using RMarkdown
+title: "Analyse comparative des réseaux de collaboration entre les étudiants du cours BIO500 et les réseaux écologiques"
 author:
   - name: Ariane Barrette
     affiliation: a,1
