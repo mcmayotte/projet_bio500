@@ -1,17 +1,19 @@
 ---
-title: Template for preparing your research report submission to PNAS using RMarkdown
+title: La collaboration des étudiants
 
 # Use letters for affiliations, numbers to show equal authorship (if applicable) and to indicate the corresponding author
 author:
-  - name: Alice Anonymous
+  - name: Ariane Barrette
     affiliation: a,1,2
-  - name: Bob Security
-    affiliation: a,b
+  - name: Mia Carrière
+    affiliation: a
+  - name: Laurie-Anne Cournoyer
+    affiliation: a
+  - name: Marie-Claude Mayotte
+    affiliation: a
 address:
   - code: a
-    address: Some Institute of Technology, Department, Street, City, State, Zip
-  - code: b
-    address: Another University Department, Street, City, State, Zip
+    address: Université de Sherbrooke, Département de biologie,2500 Boulevard de l'Université, Sherbrooke, Québec, J1K 2R1
 
 corresponding_author:
   code: 2
