@@ -11,6 +11,8 @@ library("targets")
 library("tarchetypes")
 library("rmarkdown")
 
+tar_option_set(packages = c("rmarkdown", "knitr", "RSQLite", "leaflet", "leaflegend", "gplots"))
+
 # Localisation des scripts R
 source("scripts/nettoyage_donnees.R")
 source("scripts/requetes_SQL.R")
@@ -32,13 +34,16 @@ list(
   ),
   tar_target(
     # Scripts requetes_SQL, dont devraient sortir les donnees necessaires a la creation de figures
-    name = req_sql, #Cible pour le modèle
+    name = con, #Cible pour le modèle
     command = creation_tab(data) #Exécuter
+  ),
+  tar_target(
+    name = req_sql,
+    command = donnees_sql(con)
   ),
   tar_render(
     name = rapport, # Cible du rapport
     path = "./rapport/rapport.Rmd" # Le path du rapport à renderiser
   )
 )
-
 

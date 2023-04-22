@@ -1,12 +1,15 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 clean_data|function|a0a8be118d4a572c|||||||||||||||
-creation_tab|function|a2ac14a30277ae99|||||||||||||||
-data|stem|ba3edee8befa735d|e05a42f087a313fb|fedc13768865a3b6|1588979285||t19467.5240111299s|9b045980f7322433|24354|rds|local|vector|||1.285||
+con|stem|79f9d37b642a1f9e|2bb920abbb076309|ec6717ea8687704d|-1614524628||t19469.7351725541s|bf1a1ce7cd804ab5|251|rds|local|vector|||0.164|Closing open result set, pending rows. Closing open result set, pending rows. Closing open result set, pending rows. Closing open result set, pending rows|
+creation_tab|function|231f0a6296c8b788|||||||||||||||
+data|stem|ba3edee8befa735d|e05a42f087a313fb|fedc13768865a3b6|1588979285||t19469.6655535886s|9b045980f7322433|24354|rds|local|vector|||4.523||
 donnees|stem|3fe873ceaa51890e|8bb3f4eee3e1487e|e2e5b02d6c11ab34|-1612055499||t19462.5796189989s|a1c456b03adbfbf8|44|rds|local|vector|||1.14||
-file_paths|stem|33dfabffe85cbb40|71948d4e0817f43c|abc94aa3aac4d92f|1115504559||t19465.8833376154s|1a043faf0b3206cc|212|rds|local|vector|||0.001||
-path|stem|b6008fdf31dfd7e2|2aa68212adf25336|ef46db3751d8e999|-1383433547|./data|t19465.673671071s|7d645bf271ac4f66|1088|file|local|vector|||0.002||
-rapport|stem|eb15c6e7f6937400|82111be8a07d6cc5|4745aa592080ea1d|-316371949|rapport/rapport.html*rapport/rapport.Rmd|t19467.531736231s|db9ec3cf612fc4f5|623345|file|local|vector|||1.874||
+donnees_sql|function|46ec02868c08ae93|||||||||||||||
+file_paths|stem|33dfabffe85cbb40|71948d4e0817f43c|abc94aa3aac4d92f|1115504559||t19469.6655000519s|1a043faf0b3206cc|212|rds|local|vector|||0.016||
+path|stem|b6008fdf31dfd7e2|2aa68212adf25336|ef46db3751d8e999|-1383433547|./data|t19469.6405795943s|7d645bf271ac4f66|1088|file|local|vector|||0.002||
+rapport|stem|8c3122765491f981|01a3ff80151969f9|1c540d75401f04c2|-316371949|rapport/rapport.html*rapport/rapport.Rmd|t19469.7363687582s||638501|file|local|vector|||1.374||height must be a vector or a matrix
 rapport_rmd|stem||d5543d6cf6688137|ca4d1c3ee127925b|1333238327||t19461.7730027703s||0|rds|local|vector|||0.405|path1rapport.Rmd No such file or directory|The file rapport.Rmd does not exist.
 read_data|function|8b525dd7e33fca52|||||||||||||||
-req_sql|stem|79f9d37b642a1f9e|2bb920abbb076309|21153542f9446808|1634902131||t19467.5309095017s|bf1a1ce7cd804ab5|251|rds|local|vector|||0.553|Closing open result set, pending rows. Closing open result set, pending rows. Closing open result set, pending rows. Closing open result set, pending rows|
+req_sql|stem|165cb5d086f610d2|398d61d22b4c45db|ffa179a496c5b145|1634902131||t19469.7351735148s|a8ecd91cc8af781d|9343|rds|local|vector|||0.067|Closing open result set, pending rows. Closing open result set, pending rows. Closing open result set, pending rows|
 reseau|stem||c80b227b90cbef2f|cb705fbc0389cba8|-902459421||t19467.528982341s||0|rds|local|vector|||0.004||could not find function mon_modele
+script_barplot|stem||3038bc040d407697|39394dec5a755ffe|-442444242||t19469.6887903873s||0|rds|local|vector|||0.107||height must be a vector or a matrix

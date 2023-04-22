@@ -9,7 +9,6 @@ library(gplots)
 
 #-----------------------------------------------------
 # nb moyen de collaboration ~ formation préalable
-#-----------------------------------------------------
 
 # Enlever la ligne des étudiants qui ne sont pas dans le cours 
 moy_collab_form <- subset(moy_collab_form, moy_collab_form$formation_prealable != "NA")
@@ -43,3 +42,4 @@ barplot2(moy_collab_annee$moy_collab, beside =T, ci.u = moy_collab_annee$moy_col
 
 #Enregistrer la figure
 png("figures/barplot_annee.png")
+
