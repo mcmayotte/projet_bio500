@@ -1,0 +1,158 @@
+---
+title: "Analyse comparative des réseaux de collaboration entre les étudiants du cours BIO500 et les réseaux écologiques"
+author:
+  - name: Ariane Barrette
+    affiliation: a,1
+  - name: Mia Carrière
+    affiliation: a
+  - name: Laurie-Anne Cournoyer
+    affiliation: a
+  - name: Marie-Claude Mayotte
+    affiliation: a
+address:
+  - code: a
+    address: Département de biologie, Faculté des sciences, Université de Sherbrooke, Sherbrooke, Québec, J1K 2R1 
+corresponding_author:
+  code: 1
+  text: "To whom correspondence should be addressed. E-mail: ariane.barrette@usherbrooke.ca"
+
+abstract: |
+ Les réseaux écologiques peuvent être utilisés dans le but de comprendre les interactions entre les différentes espèces d’une communauté écologique. Ainsi, cet article vise à comparer les réseaux de collaboration entre les étudiants du cours de méthodes en écologie computationnelle (BIO500) à ceux des réseaux écologiques. Trois questions de recherches furent élaborées afin d’atteindre l’objectif principale de cet article. Une campagne de collecte de données avec la coopération de tous les étudiants du cours a d’abord été créé afin de concevoir trois bases de données (collaboration, étudiant et cours). Une analyse des trois bases de données a été effectué afin de réaliser trois figures à l’aide de différentes librairies dans RStudio. Les résultats montrent que la centralité est un concept important dans les réseaux écologiques et peut également être utilisés dans le contexte scolaire. En effet, elle permet d’identifier les étudiants « clés » dans le réseau de collaboration des étudiants. De plus, les résultats permettent de constater que les étudiants ont interagis davantage avec les zones centrales comme Montréal, Sherbrooke ou Trois-Rivières quel que soit leur région administrative d’origine. 
+
+acknowledgements: |
+  Please include your acknowledgments here, set in a single paragraph. Please do not include any acknowledgments in the Supporting Information, or anywhere else in the manuscript.
+keywords:
+  - Réseau écologique
+  - Interactions entre les collaborations
+  
+## must be one of: pnasresearcharticle (usual two-column layout), pnasmathematics (one column layout), or pnasinvited (invited submissions only)
+pnas_type: pnasresearcharticle
+bibliography: pnas-sample.bib
+csl: pnas.csl
+lineno: false
+output: rticles::pnas_article
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+This PNAS journal template is provided to help you write your work in
+the correct journal format. Instructions for use are provided below.
+
+Note: please start your introduction without including the word
+"Introduction" as a section heading (except for math articles in the
+Physical Sciences section); this heading is implied in the first
+paragraphs.
+
+# Introduction
+Dans une communauté écologique, différentes espèces interagissent ensemble. L’interaction entre ces espèces peut mener à produire différents modèles de réseau. En effet, au sein des réseaux écologiques, l’organisation et la position des espèces dans la communauté peuvent être déterminées [@delmas2019analysing]. Les réseaux écologiques des espèces peuvent également s’appliquer à d’autres contextes. L’objectif principal de cet article vise à comparer les réseaux de collaboration entre les étudiants du cours de méthodes en écologie computationnelle à ceux des réseaux écologiques. L’atteinte de cet objectif permettra de mieux comprendre les différences entre les propriétés des réseaux des étudiants en écologie et celles des réseaux écologiques. Ainsi, pour notre projet, trois questions de recherches ont été élaborées : (1) « Peut-on observer un patron de centralité entre les étudiants d'une classe en analysant leurs interactions dans les travaux scolaires ? », (2) « Retrouve-t-on des patrons d’interactions entre les élèves basé sur leur formation préalable et leur année d’admission au baccalauréat ? », (3) « Comment les relations entre les élèves d'une classe varient-elles en fonction de leur région administrative ? ». Afin de répondre à ces différentes questions de recherches, une analyse collaborative sur la plateforme GitHub a été réalisé à l’aide de Rstudio.
+
+# Méthodes 
+Afin de répondre à ces questions de recherche, une campagne de collecte de données a été réalisée en collaboration avec tous les étudiants du cours de méthodes computationnelles afin de créer trois bases de données (collaboration, étudiant et cours). Afin d’analyser ces données, un projet collaboratif sur la plateforme GitHub a été créé. À partir de cette plateforme et par l’entremise de Rstudio, le nettoyage des données, la création des figures et du target ont été réalisés. Plusieurs librairies ont été utilisés pour créer les différentes figures : leaflet, leaflegend, htmlwidgets, webshot, ggplot2, gplots, igraph et fields. En ce qui concerne le target, c’est la librairie RSQLite qui a été utilisée. Pour terminer, l’article a été réalisé à l’aide de Rmarkdown. 
+# Résultats
+```{=html}
+list(
+  tar_target(
+    name = path, # Cible
+    command = "./data", # Dossier contenant les fichiers de données
+    format = "file" # Format de la cible
+  ),
+  tar_target(
+    name = file_paths, # Cible
+    command = list.files(path, full.names = TRUE) # Liste les fichiers dans le dossier
+  ),
+  tar_target(
+    name = data, # Cible pour le modèle 
+    command = clean_data(file_paths) # Jointure des jeux de données
+  ),
+  tar_target(
+    # Scripts requetes_SQL, dont devraient sortir les donnees necessaires a la creation de figures
+    name = req_sql, #Cible pour le modèle
+    command = creation_tab(data) #Exécuter
+  ),
+  tar_render(
+    name = rapport, # Cible du rapport
+    path = "./rapport/rapport.Rmd" # Le path du rapport à renderiser
+  )
+)
+
+2+2
+data_2_plot <- tar_read(resultat_modele)
+plot(data_2_plot)
+
+````
+
+
+# Discussion
+
+## Centralité
+La centralité est un concept important dans les réseaux écologiques puisqu’elle est souvent utiliser afin d’identifier les espèces « clés » du système [@cagua2019keystoneness].  En effet, selon ce principe, les espèces participants dans plus de chaines sont plus susceptibles d’affecter l’abondance des autres espèces [@cagua2019keystoneness]. De plus, elle peut apporter de l’information pour prédire quelle espèce, si elle venait à disparaître, aurait le plus grand impact sur la communauté [@cagua2019keystoneness]. Toutefois, il faut apporter la nuance que la centralité ne parvient pas à identifier les espèces qui sont moins connectés, mais qui ont tout de même une grande capacité de contrôle sur la communauté [@cagua2019keystoneness]. Dans le cas de cette expérience, il est premièrement possible d’observer un patron de centralité entre les étudiants en analysant leurs interactions dans les travaux scolaires. En effet, les étudiants ayant collaborés avec un grand nombre de personnes différentes sont représentés comme étant des étudiants centraux. En interagissant avec une grande partie du réseau, ces étudiants ont un impact significatif sur l'abondance des autres élèves, qui dans ce contexte peut être représentée par leurs notes scolaires, établissant ainsi un lien avec les systèmes écologiques. 
+Par ailleurs, ce réseau prend seulement en compte les interactions entre les élèves de la classe. Toutefois, plusieurs élèves ont interagi, au cours de leur baccalauréat, avec des étudiants ne se sont pas dans ce cours. Par conséquent, ces étudiants font donc partie d’un autre réseau et la centralité ne nous permet donc pas d’évaluer adéquatement leur importance. 
+
+## Patrons d’interactions
+Tous les réseaux écologiques, même les plus hétérogènes, présentent certaines structures et regroupements d’interactions entre les nœuds  [@delmas2019analysing; @milo2002shen]. En fait, il existe 13 patrons possibles pour une interaction à trois nœuds chacun représentant une relation différente  [@delmas2019analysing; @milo2002shen]. Par exemple, il y a la concurrence entre A et B pour la ressource partagée C (A -> C <- B) ou une chaine alimentaire où A prédate B et B prédate C (A -> B -> C) [@delmas2019analysing; @milo2002shen]. En se basant sur la formation préalable des étudiants, on peut observer que les étudiants ayant une formation universitaire sont plus susceptible de travailler avec un plus grand nombre de personnes différentes que les personnes ayant une formation technicienne. De plus, les étudiants qui sont rentrés au baccalauréat en écologie en hiver 2019 ont travaillé avec un plus grand nombre de personnes que ceux des autres sessions d’admission et cela malgré qu’ils soient beaucoup moins que les étudiants à être rentrés à l’automne 2020. Cela est assez logique puisque ces étudiants ont un parcours différent et par conséquent, ils doivent souvent collaborés avec d’autres cohortes. Il est donc possible d’observer certains patrons d’interactions entre les élèves.  
+
+Toutefois, ces résultats sont surtout préliminaires puisqu’ils ne tiennent pas compte de la proportion d’étudiants dans chaque catégorie. Par exemple, comme il y a moins d’étudiants qui ont une formation technicienne que pré-universitaire, il est logique qu’il possède un nombre d’interactions inférieurs aux autres catégories. Pour avoir un meilleur aperçu des regroupements, il faudrait pondérer les moyens de chaque catégorie. 
+
+## Connectivité des régions administratives
+ Pour assurer la survie des espèces, il est crucial d'évaluer leur connectivité entre les différentes zones géographiques [@baguette2013individual]. En effet, la disparition d'une population locale peut précéder l'extinction de l'espèce dans son ensemble [@baguette2013individual]. De plus, certaines espèces jouent un rôle central dans le réseau écologique, ce qui signifie que leur disparition peut entraîner des conséquences importantes sur d'autres espèces et sur la stabilité de l'écosystème [@baguette2013individual]. Il est donc important de prendre en compte à la fois la connectivité des habitats et le rôle des espèces centrales pour maintenir la biodiversité [@baguette2013individual].
+
+En observant les interactions entre les élèves, la région de Montréal apparaît comme la zone centrale la plus peuplée en termes d'étudiants, ce qui est cohérent étant donné qu'elle est la région la plus densément peuplée du Québec. De plus, la zone avec la dispersion la plus importante, caractérisée ici par les interactions entre les étudiants, se situe entre Montréal et Sherbrooke. Il semble y avoir un patron montrant que la majorité des étudiants, quelle que soit leur région administrative, ont tendance à interagir plus fréquemment avec les zones centrales telles que Montréal, Sherbrooke et Trois-Rivières, plutôt qu'avec les zones situées à proximité. Pour établir un parallèle avec le réseau écologique, cette observation pourrait être attribuée à la présence d'étudiants clés dans ces régions. 
+
+Bref, le réseaux étudiants ressemblent sur plusieurs points aux réseaux écologiques par sa centralité, ses patrons d’assemblages et par la connectivité des régions administratives. 
+
+
+
+# References {#references .unnumbered}
+
+
+
+
+
+## Single column equations {#single-column-equations .unnumbered}
+
+Authors may use 1- or 2-column equations in their article, according to
+their preference.
+
+To allow an equation to span both columns, options are to use the
+`\begin{figure*}...\end{figure*}` environment mentioned above for
+figures, or to use the `\begin{widetext}...\end{widetext}` environment
+as shown in equation $$eqn:example$$ below.
+
+Please note that this option may run into problems with floats and
+footnotes, as mentioned in the [cuted package
+documentation](http://texdoc.net/pkg/cuted). In the case of problems
+with footnotes, it may be possible to correct the situation using
+commands `\footnotemark` and `\footnotetext`.
+
+$$\begin{aligned}
+(x+y)^3&=(x+y)(x+y)^2\\
+       &=(x+y)(x^2+2xy+y^2) \label{eqn:example} \\
+       &=x^3+3x^2y+3xy^3+x^3. 
+\end{aligned}$$
+
+```{=html}
+<!-- pandoc writes all tables using longtable, which fails in 2-column mode
+
+  Species                    CBS     CV     G3
+  ----------------------- ------ ------ ------
+  1\. Acetaldehyde           0.0    0.0    0.0
+  2\. Vinyl alcohol          9.1    9.6   13.5
+  3\. Hydroxyethylidene     50.8   51.2   54.0
+
+  : Comparison of the fitted potential energy surfaces and ab initio
+  benchmark electronic energy calculations
+
+-->
+```
+
+
+
+
+<!-- Leave these lines as they are at the end of your .Rmd file to ensure placement of methods & acknowledgements sections before the references-->
+
+```{=tex}
+\showmatmethods
+\showacknow
+\pnasbreak
+```
