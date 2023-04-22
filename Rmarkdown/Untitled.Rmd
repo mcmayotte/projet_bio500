@@ -11,7 +11,7 @@ author:
     affiliation: a
 address:
   - code: a
-    address: Département de biologie, Faculté des sciences, Université de Sherbrooke
+    address: Département de biologie, Faculté des sciences, Université de Sherbrooke, Sherbrooke, Québec, J1K 2R1 
 corresponding_author:
   code: 1
   text: "To whom correspondence should be addressed. E-mail: ariane.barrette@usherbrooke.ca"
