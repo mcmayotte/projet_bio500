@@ -1,8 +1,12 @@
+barplot_fig <- function (con) {
 ######################################################
 # Script pour créer les barplots de nombre moyens de collaboration
 # Marie-Claude Mayotte, Ariane Barrette, Laurie-Anne Cournoyer & Mia Carrière
 # 18 avril 2023
 ######################################################
+
+moy_collab_form <- req_sql[[2]]
+moy_collab_annee <- req_sql [[1]]
 
 # Packages
 library(gplots)
@@ -42,4 +46,4 @@ barplot2(moy_collab_annee$moy_collab, beside =T, ci.u = moy_collab_annee$moy_col
 
 #Enregistrer la figure
 png("figures/barplot_annee.png")
-
+}

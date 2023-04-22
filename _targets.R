@@ -11,7 +11,7 @@ library("targets")
 library("tarchetypes")
 library("rmarkdown")
 
-tar_option_set(packages = c("rmarkdown", "knitr", "RSQLite", "leaflet", "leaflegend", "gplots"))
+tar_option_set(packages = c("rmarkdown", "knitr", "RSQLite", "leaflet", "leaflegend", "gplots", "igraph", "fields"))
 
 # Localisation des scripts R
 source("scripts/nettoyage_donnees.R")
