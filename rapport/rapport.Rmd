@@ -17,7 +17,7 @@ output: html_document
 date: "2023-04-22"
 ---
 
-```{r, include=FALSE}
+```{r, echo=FALSE}
 donnees_net <- tar_read(data)
 etudiant <- donnees_net[[1]]
 
@@ -76,17 +76,18 @@ mtext("Rang des étudiants", side = 1, line = 1, cex = 1)
 
 
 
-```{r}
+```{r, echo=FALSE}
 donnees <- tar_load(req_sql)
 moy_collab_form <- donnees[[2]]
 
 moy_collab_form <- subset(moy_collab_form, moy_collab_form$formation_prealable != "NA")
-
-barplot2(moy_collab_form[,1], beside =T, ci.u = moy_collab_form$moy_collab + moy_collab_form$ecart_type, ci.l = moy_collab_form$moy_collab - moy_collab_form$ecart_type, plot.ci = T, 
+coucou<-as.numeric(moy_collab_form$moy_collab)
+figurebar<-barplot2(coucou, beside =T, ci.u = moy_collab_form$moy_collab + moy_collab_form$ecart_type, ci.l = moy_collab_form$moy_collab - moy_collab_form$ecart_type, plot.ci = T, 
          col = c("lightblue", "mistyrose", "lightcyan"), 
          names.arg = moy_collab_form$formation_prealable, 
          xlab = "Formation préalable", ylab = "Nombre moyen de collaborations",
-         ylim = c(0,80))
+         ylim = c(0,80), xlim=c(0,4))
+
 ```
 
 
