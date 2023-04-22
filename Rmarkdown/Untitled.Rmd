@@ -47,7 +47,7 @@ paragraphs.
 # Introduction
 
 # Méthodes 
-
+Afin de répondre à ces questions de recherche, une campagne de collecte de données a été réalisée en collaboration avec tous les étudiants du cours de méthodes computationnelles afin de créer trois bases de données (collaboration, étudiant et cours). Afin d’analyser ces données, un projet collaboratif sur la plateforme GitHub a été créé. À partir de cette plateforme et par l’entremise de Rstudio, le nettoyage des données, la création des figures et du target ont été réalisés. Plusieurs librairies ont été utilisés pour créer les différentes figures : leaflet, leaflegend, htmlwidgets, webshot, ggplot2, gplots, igraph et fields. En ce qui concerne le target, c’est la librairie RSQLite qui a été utilisée. Pour terminer, l’article a été réalisé à l’aide de Rmarkdown. 
 # Résultats
 ```{=html}
 list(
