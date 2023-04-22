@@ -3,9 +3,9 @@ title: Template for preparing your research report submission to PNAS using RMar
 author:
   - name: Ariane Barrette
     affiliation: a,1
-  - name: Laurie-Anne Cournoyer
-    affiliation: a
   - name: Mia Carrière
+    affiliation: a
+  - name: Laurie-Anne Cournoyer
     affiliation: a
   - name: Marie-Claude Mayotte
     affiliation: a
