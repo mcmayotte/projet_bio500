@@ -44,18 +44,56 @@ Note: please start your introduction without including the word
 Physical Sciences section); this heading is implied in the first
 paragraphs.
 
+# Introduction
+
+# Méthodes 
+
+# Résultats
+```{=html}
+list(
+  tar_target(
+    name = path, # Cible
+    command = "./data", # Dossier contenant les fichiers de données
+    format = "file" # Format de la cible
+  ),
+  tar_target(
+    name = file_paths, # Cible
+    command = list.files(path, full.names = TRUE) # Liste les fichiers dans le dossier
+  ),
+  tar_target(
+    name = data, # Cible pour le modèle 
+    command = clean_data(file_paths) # Jointure des jeux de données
+  ),
+  tar_target(
+    # Scripts requetes_SQL, dont devraient sortir les donnees necessaires a la creation de figures
+    name = req_sql, #Cible pour le modèle
+    command = creation_tab(data) #Exécuter
+  ),
+  tar_render(
+    name = rapport, # Cible du rapport
+    path = "./rapport/rapport.Rmd" # Le path du rapport à renderiser
+  )
+)
+
+2+2
+data_2_plot <- tar_read(resultat_modele)
+plot(data_2_plot)
+
+````
+
+
 # Discussion
 
-##Centralité
+## Centralité
 La centralité est un concept important dans les réseaux écologiques puisqu’elle est souvent utiliser afin d’identifier les espèces « clés » du système [@cagua2019keystoneness].  En effet, selon ce principe, les espèces participants dans plus de chaines sont plus susceptibles d’affecter l’abondance des autres espèces [@cagua2019keystoneness]. De plus, elle peut apporter de l’information pour prédire quelle espèce, si elle venait à disparaître, aurait le plus grand impact sur la communauté [@cagua2019keystoneness]. Toutefois, il faut apporter la nuance que la centralité ne parvient pas à identifier les espèces qui sont moins connectés, mais qui ont tout de même une grande capacité de contrôle sur la communauté [@cagua2019keystoneness]. Dans le cas de cette expérience, il est premièrement possible d’observer un patron de centralité entre les étudiants en analysant leurs interactions dans les travaux scolaires. En effet, les étudiants ayant collaborés avec un grand nombre de personnes différentes sont représentés comme étant des étudiants centraux. En interagissant avec une grande partie du réseau, ces étudiants ont un impact significatif sur l'abondance des autres élèves, qui dans ce contexte peut être représentée par leurs notes scolaires, établissant ainsi un lien avec les systèmes écologiques. 
 Par ailleurs, ce réseau prend seulement en compte les interactions entre les élèves de la classe. Toutefois, plusieurs élèves ont interagi, au cours de leur baccalauréat, avec des étudiants ne se sont pas dans ce cours. Par conséquent, ces étudiants font donc partie d’un autre réseau et la centralité ne nous permet donc pas d’évaluer adéquatement leur importance. 
 
-##Patrons d’interactions
+## Patrons d’interactions
 Tous les réseaux écologiques, même les plus hétérogènes, présentent certaines structures et regroupements d’interactions entre les nœuds  [@delmas2019analysing; @milo2002shen]. En fait, il existe 13 patrons possibles pour une interaction à trois nœuds chacun représentant une relation différente  [@delmas2019analysing; @milo2002shen]. Par exemple, il y a la concurrence entre A et B pour la ressource partagée C (A -> C <- B) ou une chaine alimentaire où A prédate B et B prédate C (A -> B -> C) [@delmas2019analysing; @milo2002shen]. En se basant sur la formation préalable des étudiants, on peut observer que les étudiants ayant une formation universitaire sont plus susceptible de travailler avec un plus grand nombre de personnes différentes que les personnes ayant une formation technicienne. De plus, les étudiants qui sont rentrés au baccalauréat en écologie en hiver 2019 ont travaillé avec un plus grand nombre de personnes que ceux des autres sessions d’admission et cela malgré qu’ils soient beaucoup moins que les étudiants à être rentrés à l’automne 2020. Cela est assez logique puisque ces étudiants ont un parcours différent et par conséquent, ils doivent souvent collaborés avec d’autres cohortes. Il est donc possible d’observer certains patrons d’interactions entre les élèves.  
 
 Toutefois, ces résultats sont surtout préliminaires puisqu’ils ne tiennent pas compte de la proportion d’étudiants dans chaque catégorie. Par exemple, comme il y a moins d’étudiants qui ont une formation technicienne que pré-universitaire, il est logique qu’il possède un nombre d’interactions inférieurs aux autres catégories. Pour avoir un meilleur aperçu des regroupements, il faudrait pondérer les moyens de chaque catégorie. 
 
-##Connectivité des régions administratives
+## Connectivité des régions administratives
  Pour assurer la survie des espèces, il est crucial d'évaluer leur connectivité entre les différentes zones géographiques [@baguette2013individual]. En effet, la disparition d'une population locale peut précéder l'extinction de l'espèce dans son ensemble [@baguette2013individual]. De plus, certaines espèces jouent un rôle central dans le réseau écologique, ce qui signifie que leur disparition peut entraîner des conséquences importantes sur d'autres espèces et sur la stabilité de l'écosystème [@baguette2013individual]. Il est donc important de prendre en compte à la fois la connectivité des habitats et le rôle des espèces centrales pour maintenir la biodiversité [@baguette2013individual].
 
 En observant les interactions entre les élèves, la région de Montréal apparaît comme la zone centrale la plus peuplée en termes d'étudiants, ce qui est cohérent étant donné qu'elle est la région la plus densément peuplée du Québec. De plus, la zone avec la dispersion la plus importante, caractérisée ici par les interactions entre les étudiants, se situe entre Montréal et Sherbrooke. Il semble y avoir un patron montrant que la majorité des étudiants, quelle que soit leur région administrative, ont tendance à interagir plus fréquemment avec les zones centrales telles que Montréal, Sherbrooke et Trois-Rivières, plutôt qu'avec les zones situées à proximité. Pour établir un parallèle avec le réseau écologique, cette observation pourrait être attribuée à la présence d'étudiants clés dans ces régions. 
@@ -63,82 +101,12 @@ En observant les interactions entre les élèves, la région de Montréal appara
 Bref, le réseaux étudiants ressemblent sur plusieurs points aux réseaux écologiques par sa centralité, ses patrons d’assemblages et par la connectivité des régions administratives. 
 
 
-## Author Affiliations {#author-affiliations .unnumbered}
 
-Include department, institution, and complete address, with the
-ZIP/postal code, for each author. Use lower case letters to match
-authors with institutions, as shown in the example. Authors with an
-ORCID ID may supply this information at submission.
+# References {#references .unnumbered}
 
-## Submitting Manuscripts {#submitting-manuscripts .unnumbered}
 
-All authors must submit their articles at
-[PNAScentral](http://www.pnascentral.org/cgi-bin/main.plex). If you are
-using Overleaf to write your article, you can use the "Submit to PNAS"
-option in the top bar of the editor window.
 
-## Format {#format .unnumbered}
 
-Many authors find it useful to organize their manuscripts with the
-following order of sections; Title, Author Affiliation, Keywords,
-Abstract, Significance Statement, Results, Discussion, Materials and
-methods, Acknowledgments, and References. Other orders and headings are
-permitted.
-
-## Manuscript Length {#manuscript-length .unnumbered}
-
-PNAS generally uses a two-column format averaging 67 characters,
-including spaces, per line. The maximum length of a Direct Submission
-research article is six pages and a PNAS PLUS research article is ten
-pages including all text, spaces, and the number of characters displaced
-by figures, tables, and equations. When submitting tables, figures,
-and/or equations in addition to text, keep the text for your manuscript
-under 39,000 characters (including spaces) for Direct Submissions and
-72,000 characters (including spaces) for PNAS PLUS.
-
-## References {#references .unnumbered}
-
-References should be cited in numerical order as they appear in text;
-this will be done automatically via bibtex, e.g. @belkin2002using and
-[@berard1994embedding; @coifman2005geometric]. All references, including
-for the SI, should be included in the main manuscript file. References
-appearing in both sections should not be duplicated. SI references
-included in tables should be included with the main reference section.
-
-## Data Archival {#data-archival .unnumbered}
-
-PNAS must be able to archive the data essential to a published article.
-Where such archiving is not possible, deposition of data in public
-databases, such as GenBank, ArrayExpress, Protein Data Bank, Unidata,
-and others outlined in the Information for Authors, is acceptable.
-
-## Language-Editing Services {#language-editing-services .unnumbered}
-
-Prior to submission, authors who believe their manuscripts would benefit
-from professional editing are encouraged to use a language-editing
-service (see list at www.pnas.org/site/authors/language-editing.xhtml).
-PNAS does not take responsibility for or endorse these services, and
-their use has no bearing on acceptance of a manuscript for publication.
-
-![Placeholder image of a frog with a long example caption to show
-justification setting.](frog.png)
-
-## Digital Figures {#sec:figures .unnumbered}
-
-Only TIFF, EPS, and high-resolution PDF for Mac or PC are allowed for
-figures that will appear in the main text, and images must be final
-size. Authors may submit U3D or PRC files for 3D images; these must be
-accompanied by 2D representations in TIFF, EPS, or high-resolution PDF
-format. Color images must be in RGB (red, green, blue) mode. Include the
-font files for any text.
-
-Figures and Tables should be labelled and referenced in the standard way
-using the `\label{}` and `\ref{}` commands.
-
-Figure $$fig:frog$$ shows an example of how to insert a column-wide
-figure. To insert a figure wider than one column, please use the
-`\begin{figure*}...\end{figure*}` environment. Figures wider than one
-column should be sized to 11.4 cm or 17.8 cm wide.
 
 ## Single column equations {#single-column-equations .unnumbered}
 
@@ -176,24 +144,8 @@ $$\begin{aligned}
 
 -->
 ```
-## Supporting Information (SI) {#supporting-information-si .unnumbered}
 
-The main text of the paper must stand on its own without the SI. Refer
-to SI in the manuscript at an appropriate point in the text. Number
-supporting figures and tables starting with S1, S2, etc. Authors are
-limited to no more than 10 SI files, not including movie files. Authors
-who place detailed materials and methods in SI must provide sufficient
-detail in the main text methods to enable a reader to follow the logic
-of the procedures and results and also must reference the online
-methods. If a paper is fundamentally a study of a new method or
-technique, then the methods must be described completely in the main
-text. Because PNAS edits SI and composes it into a single PDF, authors
-must provide the following file formats only.
 
-### SI Text {#si-text .unnumbered}
-
-Supply Word, RTF, or LaTeX files (LaTeX files must be accompanied by a
-PDF with the same file name for visual reference).
 
 ### SI Figures {#si-figures .unnumbered}
 
