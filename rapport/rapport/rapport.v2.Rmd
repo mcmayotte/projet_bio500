@@ -9,6 +9,7 @@ author:
 address: Département de biologie, Faculté des sciences, Université de Sherbrooke, Sherbrooke, Québec, J1K 2R1 
  
 output: html_document
+bibliography: bibilographie.bib
 
 date: "2023-04-22"
 ---
