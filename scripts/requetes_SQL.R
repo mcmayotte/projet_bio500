@@ -69,7 +69,10 @@ dbWriteTable(con, append = TRUE, name= "coordonnees", value = coordonnees, row.n
 dbWriteTable(con, append = TRUE, name= "collaborations", value = collaboration, row.names = FALSE)
 
 return(con)
+}
 
+
+donnees_sql<- function(con){
 # Ajouter la colonne longitude dans la table etudiants
 dbSendQuery(con, "ALTER TABLE etudiants ADD COLUMN longitude REAL(10)")
 
@@ -204,11 +207,10 @@ head(moy_collab_annee)
 #-----------------------------------------------------
 # Création d'une liste pour le targets
 #-----------------------------------------------------
-return(list(moy_collab_annee, moy_collab_form, nb_collab_region, nb_paire_colla, etudiants_coordo, nb_collab_etudiant))
-
 #PAS OUBLIER!!!
 dbDisconnect(con)
 
+return(list(moy_collab_annee, moy_collab_form, nb_collab_region, nb_paire_colla, etudiants_coordo, nb_collab_etudiant))
 
 }
 
