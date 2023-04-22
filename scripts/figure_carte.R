@@ -56,4 +56,4 @@ library(webshot)
 library(ggplot2)
 
 saveWidget(map, file = "figures/carte_liens.html", selfcontained = FALSE)
-webshot("figures/carte_liens.html", file = "figures/carte_liens.png", vwidth = 800, vheight = 600)
+webshot("figures/carte_liens.html", file = "figures/carte_liens.pdf", vwidth = 800, vheight = 600)
