@@ -76,8 +76,20 @@ mtext("Rang des étudiants", side = 1, line = 1, cex = 1)
 
 Figure 1 : Réseau d'interaction entre les étudiants. Les points blancs représentes les étudiants les plus centraux alors que les points rouges représentrent les étudiants les moins centraux, c'est-à-dire ceux qui ont collaboré avec le moins de mondes.
 
-![Nombre de collaborations des différents élèves de méthodes computationnelles selon la formation préalable avant l’entrée au baccalauréat.La barre représente l’écart-type. 
+![Figure 2 : Nombre de collaborations des différents élèves de méthodes computationnelles selon la formation préalable avant l’entrée au baccalauréat.La barre représente l’écart-type. 
 \label{fig:plot2}](barplot_annee.PNG){width="45%"
+height="20%"}
+
+
+
+![Figure 3: Nombre de collaborations des différents élèves de méthodes computationnelles selon l’année d’entrée au baccalauréat.
+\label{fig:plot3}](barplot_formation.PNG){width="45%"
+height="20%"}
+
+
+
+![Figure 4 : Collaborations entre les différents élèves du cours de méthodes computationnelles selon leur région administratives d’origine.Les lignes représentent les collaborations entre deux élèves, plus la ligne est épaisse et plus il y a eu de collaborations entre ces deux régions.
+\label{fig:plot4}](carte_liens.PNG){width="45%"
 height="20%"}
 
 
@@ -98,6 +110,9 @@ Toutefois, ces résultats sont surtout préliminaires puisqu’ils ne tiennent p
 En observant les interactions entre les élèves, la région de Montréal apparaît comme la zone centrale la plus peuplée en termes d'étudiants, ce qui est cohérent étant donné qu'elle est la région la plus densément peuplée du Québec [@gouvernement_du_canada_les_2022]. De plus, la zone avec la dispersion la plus importante, caractérisée ici par les interactions entre les étudiants, se situe entre Montréal et Sherbrooke. Il semble y avoir un patron montrant que la majorité des étudiants, quelle que soit leur région administrative, ont tendance à interagir plus fréquemment avec les zones centrales telles que Montréal, Sherbrooke et Trois-Rivières, plutôt qu'avec les zones situées à proximité. Pour établir un parallèle avec le réseau écologique, cette observation pourrait être attribuée à la présence d'étudiants clés dans ces régions. 
 
 Bref, le réseaux étudiants ressemblent sur plusieurs points aux réseaux écologiques par sa centralité, ses patrons d’assemblages et par la connectivité des régions administratives.
+
+#### Lien vers le github
+https://github.com/mcmayotte/projet_bio500.git
 
 
 # Bibliographie
