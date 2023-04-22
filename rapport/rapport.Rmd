@@ -1,0 +1,109 @@
+---
+title: "Analyse comparative des réseaux de collaboration entre les étudiants du cours BIO500 et les réseaux écologiques"
+author:
+  - name: Ariane Barrette
+    affiliation: a,1
+  - name: Mia Carrière
+    affiliation: a
+  - name: Laurie-Anne Cournoyer
+    affiliation: a
+  - name: Marie-Claude Mayotte
+    affiliation: a
+address:
+  - code: a
+    address: Département de biologie, Faculté des sciences, Université de Sherbrooke, Sherbrooke, Québec, J1K 2R1 
+    
+output: html_document
+date: "2023-04-22"
+---
+
+```{r, include=FALSE}
+donnees_net <- tar_read(data)
+etudiant <- donnees_net[[1]]
+
+donnees <- tar_read(req_sql)
+nb_paire_colla <- donnees[[4]]
+
+
+library(igraph)
+library(fields)
+# Créer la matrice
+r<-nrow(etudiant)
+matrice_interact <- matrix(0, nr = r, nc = r)
+noms<-etudiant[, 1]
+
+# Attribuer les noms de colonnes et de lignes à la matrice
+colnames(matrice_interact)<-noms
+rownames(matrice_interact)<-noms
+
+# Créer une boucle pour insérer des 1 quand les deux étudiants ont eu une interaction
+n<-nrow(nb_paire_colla)
+for (i in 1:n){
+  if (nb_paire_colla[i,3]>0) {
+  matrice_interact[nb_paire_colla[i,1],nb_paire_colla[i,2]]<-1 }
+}  
+# Créer un objet igraph
+g <- graph.adjacency(matrice_interact)
+deg <- apply(matrice_interact, 2, sum) + apply(matrice_interact, 1, sum)
+# Le rang pour chaque noeud
+rk <- rank(deg)
+# Faire un code de couleur
+col.vec <- heat.colors(r)
+# Attribuer aux noeuds la couleur
+V(g)$color = col.vec[rk]
+#Taille
+col.vec <- seq(1, 5, length.out = r)
+# Attribuer aux noeuds la couleur
+V(g)$size = col.vec[rk]
+
+#Réalisation de la figure
+figure1<- plot(g,vertex.label = NA, edge.arrow.mode = 0,
+     vertex.frame.color = NA,
+     layout = layout.kamada.kawai(g))
+
+# Définir le gradient de couleur pour la légende
+color_gradient <- colorRampPalette(heat.colors(r))(100)
+
+# Définir le range de couleur
+color_range <- range(1:r)
+
+# Ajouter la légende et un titre de figure
+par(mar=c(5,4,4,8))
+image.plot(legend.only = TRUE, horizontal=TRUE, zlim=color_range,col=color_gradient)
+title("Réseau d'interactions entre les étudiants", line = 1, cex.main = 1.2)
+mtext("Rang des étudiants", side = 1, line = 1, cex = 1)
+```
+
+
+
+```{r}
+donnees <- tar_load(req_sql)
+moy_collab_form <- donnees[[2]]
+
+moy_collab_form <- subset(moy_collab_form, moy_collab_form$formation_prealable != "NA")
+
+barplot2(moy_collab_form[,1], beside =T, ci.u = moy_collab_form$moy_collab + moy_collab_form$ecart_type, ci.l = moy_collab_form$moy_collab - moy_collab_form$ecart_type, plot.ci = T, 
+         col = c("lightblue", "mistyrose", "lightcyan"), 
+         names.arg = moy_collab_form$formation_prealable, 
+         xlab = "Formation préalable", ylab = "Nombre moyen de collaborations",
+         ylim = c(0,80))
+```
+
+
+# Discussion
+
+## Centralité
+La centralité est un concept important dans les réseaux écologiques puisqu’elle est souvent utiliser afin d’identifier les espèces « clés » du système [@cagua2019keystoneness].  En effet, selon ce principe, les espèces participants dans plus de chaines sont plus susceptibles d’affecter l’abondance des autres espèces [@cagua2019keystoneness]. De plus, elle peut apporter de l’information pour prédire quelle espèce, si elle venait à disparaître, aurait le plus grand impact sur la communauté [@cagua2019keystoneness]. Toutefois, il faut apporter la nuance que la centralité ne parvient pas à identifier les espèces qui sont moins connectés, mais qui ont tout de même une grande capacité de contrôle sur la communauté [@cagua2019keystoneness]. Dans le cas de cette expérience, il est premièrement possible d’observer un patron de centralité entre les étudiants en analysant leurs interactions dans les travaux scolaires. En effet, les étudiants ayant collaborés avec un grand nombre de personnes différentes sont représentés comme étant des étudiants centraux. En interagissant avec une grande partie du réseau, ces étudiants ont un impact significatif sur l'abondance des autres élèves, qui dans ce contexte peut être représentée par leurs notes scolaires, établissant ainsi un lien avec les systèmes écologiques. 
+Par ailleurs, ce réseau prend seulement en compte les interactions entre les élèves de la classe. Toutefois, plusieurs élèves ont interagi, au cours de leur baccalauréat, avec des étudiants ne se sont pas dans ce cours. Par conséquent, ces étudiants font donc partie d’un autre réseau et la centralité ne nous permet donc pas d’évaluer adéquatement leur importance. 
+
+## Patrons d’interactions
+Tous les réseaux écologiques, même les plus hétérogènes, présentent certaines structures et regroupements d’interactions entre les nœuds  [@delmas2019analysing; @milo2002shen]. En fait, il existe 13 patrons possibles pour une interaction à trois nœuds chacun représentant une relation différente  [@delmas2019analysing; @milo2002shen]. Par exemple, il y a la concurrence entre A et B pour la ressource partagée C (A -> C <- B) ou une chaine alimentaire où A prédate B et B prédate C (A -> B -> C) [@delmas2019analysing; @milo2002shen]. En se basant sur la formation préalable des étudiants, on peut observer que les étudiants ayant une formation universitaire sont plus susceptible de travailler avec un plus grand nombre de personnes différentes que les personnes ayant une formation technicienne. De plus, les étudiants qui sont rentrés au baccalauréat en écologie en hiver 2019 ont travaillé avec un plus grand nombre de personnes que ceux des autres sessions d’admission et cela malgré qu’ils soient beaucoup moins que les étudiants à être rentrés à l’automne 2020. Cela est assez logique puisque ces étudiants ont un parcours différent et par conséquent, ils doivent souvent collaborés avec d’autres cohortes. Il est donc possible d’observer certains patrons d’interactions entre les élèves.  
+
+Toutefois, ces résultats sont surtout préliminaires puisqu’ils ne tiennent pas compte de la proportion d’étudiants dans chaque catégorie. Par exemple, comme il y a moins d’étudiants qui ont une formation technicienne que pré-universitaire, il est logique qu’il possède un nombre d’interactions inférieurs aux autres catégories. Pour avoir un meilleur aperçu des regroupements, il faudrait pondérer les moyens de chaque catégorie. 
+
+## Connectivité des régions administratives
+ Pour assurer la survie des espèces, il est crucial d'évaluer leur connectivité entre les différentes zones géographiques [@baguette2013individual]. En effet, la disparition d'une population locale peut précéder l'extinction de l'espèce dans son ensemble [@baguette2013individual]. De plus, certaines espèces jouent un rôle central dans le réseau écologique, ce qui signifie que leur disparition peut entraîner des conséquences importantes sur d'autres espèces et sur la stabilité de l'écosystème [@baguette2013individual]. Il est donc important de prendre en compte à la fois la connectivité des habitats et le rôle des espèces centrales pour maintenir la biodiversité [@baguette2013individual].
+
+En observant les interactions entre les élèves, la région de Montréal apparaît comme la zone centrale la plus peuplée en termes d'étudiants, ce qui est cohérent étant donné qu'elle est la région la plus densément peuplée du Québec. De plus, la zone avec la dispersion la plus importante, caractérisée ici par les interactions entre les étudiants, se situe entre Montréal et Sherbrooke. Il semble y avoir un patron montrant que la majorité des étudiants, quelle que soit leur région administrative, ont tendance à interagir plus fréquemment avec les zones centrales telles que Montréal, Sherbrooke et Trois-Rivières, plutôt qu'avec les zones situées à proximité. Pour établir un parallèle avec le réseau écologique, cette observation pourrait être attribuée à la présence d'étudiants clés dans ces régions. 
+
+Bref, le réseaux étudiants ressemblent sur plusieurs points aux réseaux écologiques par sa centralité, ses patrons d’assemblages et par la connectivité des régions administratives. 
